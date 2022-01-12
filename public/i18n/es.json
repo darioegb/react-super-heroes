@@ -1,0 +1,87 @@
+{
+  "superHeroes": {
+    "grid": {
+      "columns": {
+        "name": "Nombre",
+        "age": "Edad",
+        "genre": "Genero",
+        "specialty": "Especialidad",
+        "height": "Altura",
+        "weight": "Peso"
+      }
+    },
+    "detail": {
+      "title": "SuperHeroe",
+      "form": {
+        "agePlaceholder": "Ej. 50",
+        "namePlaceholder": "Ej. Superman",
+        "genrePlaceholder": "Ej. masculino",
+        "specialtyPlaceHolder": "Ej. Puede volar",
+        "heightPlaceholder": "Ej. 1.70m",
+        "weightPlaceholder": "Ej. 70kg"
+      },
+      "previewCardTitle": "Vista previa"
+    },
+    "toasts": {
+      "create": {
+        "success": "El superheoe se agregó con éxito",
+        "error": "Ocurrió un error al agregar un superheroe"
+      },
+      "update": {
+        "success": "El superheoe fue actualizado con éxito",
+        "error": "Ocurrió un error al actualizar un superheroe"
+      },
+      "remove": {
+        "success": "El superheoe ha sido eliminado exitosamente",
+        "error": "Ocurrió un error al eliminar un superheroe"
+      }
+    }
+  },
+  "globals": {
+    "title": "Superhéroes",
+    "selectDefault": "Ninguno",
+    "grid": {
+      "filterInput": {
+        "label": "Filtrar datos",
+        "placeholder": "Ej. test"
+      },
+      "noMatchingDataText": "No hay datos que coincidan con el filtro {{value}}"
+    },
+    "buttons": {
+      "confirm": "Confirmar",
+      "cancel": "Cancelar",
+      "save": "Guardar",
+      "edit": "Editar",
+      "delete": "Borrar",
+      "view": "Ver"
+    },
+    "enums": {
+      "genres": {
+        "male": "Masculino",
+        "female": "Femenino",
+        "undefined": "Indefinido"
+      }
+    },
+    "dialogs": {
+      "delete": {
+        "title": "¿Esta seguro que desea eliminar a {{value}}?"
+      }
+    }
+  },
+  "validations": {
+    "required": "El campo es obligatorio.",
+    "maxlength": "La longitud máxima permitida es {{param}}.",
+    "minlength": "La longitud mínima permitida es {{param}}.",
+    "email": "No es un correo electrónico válido.",
+    "min": "El mínimo permitido es {{param}}.",
+    "max": "El máximo permitido es {{param}}.",
+    "pattern": {
+      "numeric": "El formato válido es numérico.",
+      "alphabet": "El formato válido es alfabético.",
+      "smallLetters": "El formato válido son letras minúsculas.",
+      "capitalLetters": "El formato válido son letras mayúsculas.",
+      "alphaNumeric": "El formato válido es alfanumérico.",
+      "positive": "El formato válido es un número positivo."
+    }
+  }
+}

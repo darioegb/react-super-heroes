@@ -1,0 +1,127 @@
+{
+  "superHeroes": [
+    {
+      "id": 1,
+      "name": "SPIDERMAN",
+      "genre": 1,
+      "specialty": "esto es una prueba 1",
+      "age": 50,
+      "height": 1.7,
+      "weight": 82
+    },
+    {
+      "id": 2,
+      "name": "SUPERMAN",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 3,
+      "name": "BATMAN",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 4,
+      "name": "IRON MAN",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 5,
+      "name": "MANOLITO EL FUERTE",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 6,
+      "name": "CHAPULIN COLORADO",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 7,
+      "name": "HULK",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 8,
+      "name": "POPELLE",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 9,
+      "name": "THOR",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 10,
+      "name": "DAREDEVIL",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 11,
+      "name": "CAPITAN AMERICA",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 12,
+      "name": "PANTERA NEGRA",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 13,
+      "name": "VALQUIRIA",
+      "genre": 2,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 14,
+      "name": "VISIÓN",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 15,
+      "name": "WOLVERINE",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 16,
+      "name": "MUJER MARAVILLA",
+      "genre": 2,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 17,
+      "name": "ANTMAN",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 18,
+      "name": "HIJITUS",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 19,
+      "name": "GATUBELA",
+      "genre": 2,
+      "specialty": "esto es una prueba 1"
+    },
+    {
+      "id": 20,
+      "name": "DOCTOR STRANGER",
+      "genre": 1,
+      "specialty": "esto es una prueba 1"
+    }
+  ]
+}

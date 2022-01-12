@@ -1,0 +1,18 @@
+import { Key } from 'react';
+import { Order } from 'types';
+
+export interface Column<T> {
+  id: keyof T & Key;
+  label: string;
+  minWidth?: number;
+  align?: 'right';
+  format?: (value: number) => string;
+}
+
+export interface PageConfig<T> {
+  page: number;
+  rowsPerPage: number;
+  orderBy: keyof T;
+  order: Order;
+  filter: string;
+}

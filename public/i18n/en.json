@@ -1,0 +1,87 @@
+{
+  "superHeroes": {
+    "grid": {
+      "columns": {
+        "name": "Name",
+        "age": "Age",
+        "genre": "Genre",
+        "specialty": "Specialty",
+        "height": "Height",
+        "weight": "Weight"
+      }
+    },
+    "detail": {
+      "title": "SuperHeroe",
+      "form": {
+        "agePlaceholder": "Ex. 50",
+        "namePlaceholder": "Ex. Superman",
+        "genrePlaceholder": "Male example",
+        "specialtyPlaceHolder": "Ex. Can fly",
+        "heightPlaceholder": "Ex. 1.70m",
+        "weightPlaceholder": "Ex. 70kg"
+      },
+      "previewCardTitle": "Preview"
+    },
+    "toasts": {
+      "create": {
+        "success": "The superheoe was added successfully",
+        "error": "An error occurred while adding a superhero"
+      },
+      "update": {
+        "success": "The superheoe was updated successfully",
+        "error": "An error occurred while updating a superhero"
+      },
+      "remove": {
+        "success": "The superheoe has been successfully removed",
+        "error": "An error occurred while deleting a superhero"
+      }
+    }
+  },
+  "globals": {
+    "title": "Superheroes",
+    "selectDefault": "None",
+    "grid": {
+      "filterInput": {
+        "label": "Filter data",
+        "placeholder": "Ex. test"
+      },
+      "noMatchingDataText": "No data matching the filter {{value}}"
+    },
+    "buttons": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "save": "Save",
+      "edit": "Edit",
+      "delete": "Delete",
+      "view": "View"
+    },
+    "enums": {
+      "genres": {
+        "male": "Male",
+        "female": "Female",
+        "undefined": "Undefined"
+      }
+    },
+    "dialogs": {
+      "delete": {
+        "title": "Are you sure you want to remove {{value}}?"
+      }
+    }
+  },
+  "validations": {
+    "required": "The field is required.",
+    "maxlength": "The maximum length allowed is {{param}}.",
+    "minlength": "The minimum allowed length is {{param}}.",
+    "email": "It is not a valid email.",
+    "min": "The minimum allowed is {{param}}.",
+    "max": "The maximum allowed is {{param}}.",
+    "pattern": {
+      "numeric": "The valid format is numeric.",
+      "alphabet": "The valid format is alphabetical.",
+      "smallLetters": "The valid format is lowercase letters.",
+      "capitalLetters": "The valid format is capital letters.",
+      "alphaNumeric": "The valid format is alphanumeric.",
+      "positive": "The valid format is a positive number."
+    }
+  }
+}
