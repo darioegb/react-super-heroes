@@ -76,7 +76,7 @@ export const SuperHeroGrid = () => {
       <TablePagination
         rowsPerPageOptions={rowsPerPageConfig}
         component="div"
-        count={rows?.length}
+        count={filteredRows?.length ? filteredRows.length : rows?.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

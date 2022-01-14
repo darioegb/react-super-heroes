@@ -52,7 +52,8 @@ export const SuperHeroDetailPage = () => {
     setView((history.location.state as { view: boolean })?.view);
   }, [history, setView]);
 
-  const onSubmit = async (superHero: SuperHero) => {
+  const onSubmit = async (data: unknown) => {
+    const superHero = data as SuperHero;
     const opType = selectedSuperHero ? httpMethodKeys.put : httpMethodKeys.post;
     try {
       opType === httpMethodKeys.put
