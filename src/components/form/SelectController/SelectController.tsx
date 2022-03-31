@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mui/material';
 import { Control, FieldValues, Controller } from 'react-hook-form';
 
-import { ObjectIndexer, Option } from 'interfaces';
+import { Option } from 'interfaces';
 import { useCustomTranslate } from 'hooks';
 
 interface SelectControllerProps {
@@ -13,7 +13,7 @@ interface SelectControllerProps {
   options: Option[];
   optionLabels: { path: string; type: { [key: number]: string } };
   placeholder?: string;
-  error?: ObjectIndexer<string>;
+  error?: Record<string, string>;
   disabled?: boolean;
 }
 

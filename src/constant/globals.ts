@@ -1,4 +1,4 @@
-import { ObjectIndexer, PageConfig } from 'interfaces';
+import { PageConfig } from 'interfaces';
 import { SnackbarOrigin } from 'notistack';
 
 export const idKey = 'id';
@@ -8,8 +8,8 @@ export const httpMethodKeys = {
   post: 'create',
   put: 'update',
 };
-export const rowsPerPageConfig = [5, 10, 15, 20];
-export const defaultPageConfig: PageConfig<ObjectIndexer<any>> = {
+export const rowsPerPageConfig = [5, 10, 15, 20, 30, 50];
+export const defaultPageConfig: PageConfig<unknown> = {
   page: 0,
   rowsPerPage: 5,
   orderBy: 'id',

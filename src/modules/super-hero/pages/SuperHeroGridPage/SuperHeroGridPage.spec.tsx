@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
-import http from 'config/httpCommon';
+import { instances } from 'config/httpCommon';
 import { SuperHeroProvider } from 'modules/super-hero/context';
 import { SuperHeroGridPage } from './SuperHeroGridPage';
 
@@ -13,12 +13,13 @@ jest.mock('features/super-hero/hooks/useSuperHero', () => ({
 }));
 
 describe('SuperHeroGridPage', () => {
+  const [instance] = instances;
   it('should render SuperHeroGridPage', () => {
     const { container } = render(<SuperHeroProvider children={<SuperHeroGridPage />} />);
     expect(container).toMatchSnapshot();
   });
   it('should change filter value when the input value is changed', async () => {
-    http.get = jest.fn().mockResolvedValueOnce([]);
+    instance.get = jest.fn().mockResolvedValueOnce([]);
     const { container } = render(<SuperHeroProvider children={<SuperHeroGridPage />} />);
     const input = container.querySelectorAll('input')[0];
     fireEvent.change(input, { target: { value: 'super' } });

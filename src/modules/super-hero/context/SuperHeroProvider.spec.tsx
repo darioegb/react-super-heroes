@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import http from 'config/httpCommon';
+import { instances } from 'config/httpCommon';
 import { useSuperHero } from '../hooks/useSuperHero';
 import { SuperHeroProvider } from './SuperHeroProvider';
 import { GenreEnum } from 'constant';
@@ -15,6 +15,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('SuperHeroProvider', () => {
+  const [instance] = instances;
   const mockSuperHero = { id: '1', name: 'test', genre: GenreEnum.Male, specialty: 'test superHero' };
 
   const SuperHeroProviderHost = () => {
@@ -48,12 +49,12 @@ describe('SuperHeroProvider', () => {
   });
 
   it('should execute onDelete when click delete button', async () => {
-    http.delete = jest.fn().mockResolvedValueOnce('default');
+    instance.delete = jest.fn().mockResolvedValueOnce('default');
     render(<SuperHeroProvider children={<SuperHeroProviderHost />} />, { wrapper: MemoryRouter });
     const button = screen.getByText('DELETE');
     button && fireEvent.click(button);
     await waitFor(() => {
-      expect(http.delete).toHaveBeenCalled();
+      expect(instance.delete).toHaveBeenCalled();
     });
   });
 });

@@ -1,4 +1,4 @@
-import { Option } from 'interfaces';
+import { Option, PageConfig, ServerPaginationConfig } from 'interfaces';
 import { Order } from 'types';
 
 /**
@@ -29,4 +29,23 @@ export const stableSort = <T>(array: T[], comparator: (a: T, b: T) => number) =>
     return a[1] - b[1];
   });
   return stabilizedThis.map((el) => el[0]);
+};
+
+export const createHttpParams = <T>(
+  pageConfig: PageConfig<T>
+): ServerPaginationConfig => {
+  let params: ServerPaginationConfig = {};
+  const { order, page, rowsPerPage, orderBy, filter } = pageConfig;
+  params = {
+    _page: page,
+    ...(rowsPerPage > 0 && { _limit: rowsPerPage }),
+    _sort: orderBy as string,
+    _order: order,
+  };
+
+  if (filter && filter.length > 0) {
+    params.name_like = filter;
+  }
+
+  return params;
 };

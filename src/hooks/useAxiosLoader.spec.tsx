@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import http from 'config/httpCommon';
+import { instances } from 'config/httpCommon';
 import { GenreEnum } from 'constant';
 import { getAll } from 'utils';
 import { useAxiosLoader } from './useAxiosLoader';
@@ -21,6 +21,7 @@ jest.mock('http', () => {
 });
 
 describe('useAxiosLoader', () => {
+  const [instance] = instances;
   it('should return false when not exist http request', () => {
     const { result } = renderHook(() => useAxiosLoader());
     expect(result.current[0]).not.toBeTruthy();
@@ -34,7 +35,7 @@ describe('useAxiosLoader', () => {
     };
     const payload = { data: superHero };
     // Now mock axios get method
-    http.get = jest.fn().mockResolvedValueOnce(payload);
+    instance.get = jest.fn().mockResolvedValueOnce(payload);
     const { result } = renderHook(() => useAxiosLoader());
     const { data } = await getAll('/superHero');
     expect(data).toEqual(superHero);

@@ -1,9 +1,10 @@
-import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEvent } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
+import { useTranslation } from 'react-i18next';
 
 import { GridTableHead, EmptyGrid } from 'components';
 import { rowsPerPageConfig } from 'constant';
@@ -13,6 +14,7 @@ import { SuperHero } from 'modules/super-hero/interfaces/superHero';
 import { PageConfig } from 'interfaces';
 
 export const SuperHeroGrid = () => {
+  const { t: translate } = useTranslation();
   const {
     columns,
     page,
@@ -25,13 +27,7 @@ export const SuperHeroGrid = () => {
     onAddOrEditOrView,
     dispatch,
   } = useSuperHero();
-  const [filteredRows, setFilteredRows] = useState<SuperHero[]>();
-
-  useEffect(() => {
-    if (filter?.length > 2 || filter?.length === 0) {
-      setFilteredRows(rows.filter((row) => row.name.includes(filter.toLocaleUpperCase())));
-    }
-  }, [filter, rows]);
+  const paginationConfig = [...rowsPerPageConfig, { value: -1, label: translate('globals.paginationAllOption') }];
 
   const handleRequestSort = (_event: MouseEvent<unknown>, property: keyof SuperHero) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -55,7 +51,7 @@ export const SuperHeroGrid = () => {
 
   return (
     <Paper style={{ width: '100%' }}>
-      <TableContainer style={{ maxHeight: 400 }}>
+      <TableContainer style={{ maxHeight: '60vh' }}>
         <Table stickyHeader aria-label="sticky table">
           <GridTableHead
             onRequestSort={handleRequestSort}
@@ -65,8 +61,8 @@ export const SuperHeroGrid = () => {
             onAddOrEditOrView={onAddOrEditOrView}
           />
           <TableBody>
-            {filteredRows?.length || (!filteredRows && rows?.length) ? (
-              <SuperHeroGridItemList filteredRows={filteredRows} />
+            {rows?.length ? (
+              <SuperHeroGridItemList />
             ) : (
               <EmptyGrid value={filter} />
             )}
@@ -74,11 +70,11 @@ export const SuperHeroGrid = () => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={rowsPerPageConfig}
+        rowsPerPageOptions={paginationConfig}
         component="div"
-        count={filteredRows?.length ? filteredRows.length : rows?.length}
+        count={20}
         rowsPerPage={rowsPerPage}
-        page={page}
+        page={rows?.length <= 0 ? 0 : page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />

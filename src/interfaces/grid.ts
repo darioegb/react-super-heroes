@@ -12,7 +12,7 @@ export interface Column<T> {
 export interface PageConfig<T> {
   page: number;
   rowsPerPage: number;
-  orderBy: keyof T;
+  orderBy: keyof T | 'id';
   order: Order;
   filter: string;
 }

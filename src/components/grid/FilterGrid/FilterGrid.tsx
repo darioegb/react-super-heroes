@@ -11,10 +11,10 @@ export const FilterGrid = ({ handleChange }: FilterGridProps) => {
 
   return (
     <TextField
+      margin='normal'
+      type='search'
       label={translate('globals.grid.filterInput.label')}
       placeholder={translate('globals.grid.filterInput.placeholder')}
-      margin="normal"
-      fullWidth
       onChange={handleChange}
     />
   );

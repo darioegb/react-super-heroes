@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import http from 'config/httpCommon';
+import { instances } from 'config/httpCommon';
 
 export const useAxiosLoader = () => {
   const [counter, setCounter] = useState(0);
@@ -25,15 +25,17 @@ export const useAxiosLoader = () => {
   }, []); // create the interceptors
 
   useEffect(() => {
-    // add request interceptors
-    const reqInterceptor = http.interceptors.request.use(interceptors.request, interceptors.error);
-    // add response interceptors
-    const resInterceptor = http.interceptors.response.use(interceptors.response, interceptors.error);
-    return () => {
-      // remove all intercepts when done
-      http.interceptors.request.eject(reqInterceptor);
-      http.interceptors.response.eject(resInterceptor);
-    };
+    instances.forEach(instance => {      
+      // add request interceptors
+      const reqInterceptor = instance.interceptors.request.use(interceptors.request, interceptors.error);
+      // add response interceptors
+      const resInterceptor = instance.interceptors.response.use(interceptors.response, interceptors.error);
+      return () => {
+        // remove all intercepts when done
+        instance.interceptors.request.eject(reqInterceptor);
+        instance.interceptors.response.eject(resInterceptor);
+      };
+    })
   }, [interceptors]);
 
   return [counter > 0];

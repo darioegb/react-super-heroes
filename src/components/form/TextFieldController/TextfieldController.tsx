@@ -2,8 +2,6 @@ import { TextField } from '@mui/material';
 import { HTMLInputTypeAttribute } from 'react';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 
-import { ObjectIndexer } from 'interfaces';
-
 interface TextfieldControllerProps {
   name: string;
   control: Control<FieldValues, object>;
@@ -11,7 +9,7 @@ interface TextfieldControllerProps {
   label: string;
   placeholder?: string;
   variant?: 'filled' | 'outlined' | 'standard';
-  error?: ObjectIndexer<string>;
+  error?: Record<string, string>;
   disabled?: boolean;
   type?: HTMLInputTypeAttribute;
   multiline?: boolean;

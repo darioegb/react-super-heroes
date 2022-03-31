@@ -1,5 +1,6 @@
 {
   "superHeroes": {
+    "title": "Superheroes",
     "grid": {
       "columns": {
         "name": "Name",
@@ -38,8 +39,9 @@
     }
   },
   "globals": {
-    "title": "Superheroes",
+    "title": "CRUD with MUI",
     "selectDefault": "None",
+    "paginationAllOption": "All",
     "grid": {
       "filterInput": {
         "label": "Filter data",

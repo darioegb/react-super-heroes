@@ -1,5 +1,6 @@
 {
   "superHeroes": {
+    "title": "Superhéroes",
     "grid": {
       "columns": {
         "name": "Nombre",
@@ -38,8 +39,9 @@
     }
   },
   "globals": {
-    "title": "Superhéroes",
+    "title": "ABM con MUI",
     "selectDefault": "Ninguno",
+    "paginationAllOption": "Todas",
     "grid": {
       "filterInput": {
         "label": "Filtrar datos",
