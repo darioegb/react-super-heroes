@@ -8,8 +8,9 @@ import { Column } from 'interfaces';
 import { SuperHero, SuperHeroState } from 'modules/super-hero/interfaces/superHero';
 import { superHeroReducer } from 'modules/super-hero/store/superHeroReducer';
 import { SuperHeroContext } from './SuperHeroContext';
-import { remove } from 'utils';
+import { fetch } from 'utils';
 import { useCustomTranslate } from 'hooks';
+import { instances } from 'config/httpCommon';
 
 interface SuperHeroProviderProps {
   children: JSX.Element;
@@ -20,6 +21,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const { dropdownTranslate } = useCustomTranslate();
+  const [instance] = instances;
 
   const initialState: SuperHeroState = {
     superHeroes: [],
@@ -52,19 +54,25 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
   const onDelete = async (item: SuperHero) => {
     const id = item.id as string;
 
-    try {
-      await remove('superHeroes', id);
-      dispatch({ type: '[SuperHero] remove', payload: { id } });
-      enqueueSnackbar(translate('superHeroes.toasts.remove.success'), {
-        variant: 'success',
-        anchorOrigin,
-      });
-    } catch (error) {
+    const { isError } = await fetch({
+      instance,
+      url: `superHeroes/${id}`,
+      method: 'put',
+      data: id,
+    });
+
+    if (isError) {
       enqueueSnackbar(translate('superHeroes.toasts.remove.error'), {
         variant: 'error',
         anchorOrigin,
       });
+      return;
     }
+    dispatch({ type: '[SuperHero] remove', payload: { id } });
+    enqueueSnackbar(translate('superHeroes.toasts.remove.success'), {
+      variant: 'success',
+      anchorOrigin,
+    });
   };
 
   return (

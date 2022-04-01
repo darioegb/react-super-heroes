@@ -8,7 +8,7 @@ export const httpMethodKeys = {
   post: 'create',
   put: 'update',
 };
-export const rowsPerPageConfig = [5, 10, 15, 20, 30, 50];
+export const rowsPerPageConfig = [5, 10, 15, 20, 30, 50, 100];
 export const defaultPageConfig: PageConfig<unknown> = {
   page: 0,
   rowsPerPage: 5,

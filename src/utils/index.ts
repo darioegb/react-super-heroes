@@ -1,2 +1,2 @@
-export * from './http';
+export * from './fetch';
 export * from './utils';

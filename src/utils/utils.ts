@@ -36,9 +36,14 @@ export const createHttpParams = <T>(
 ): ServerPaginationConfig => {
   let params: ServerPaginationConfig = {};
   const { order, page, rowsPerPage, orderBy, filter } = pageConfig;
+  
+  if (rowsPerPage < 0) {
+    return params;
+  }
+  
   params = {
-    _page: page,
-    ...(rowsPerPage > 0 && { _limit: rowsPerPage }),
+    _page: page + 1,
+    _limit: rowsPerPage,
     _sort: orderBy as string,
     _order: order,
   };

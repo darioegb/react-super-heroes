@@ -4,17 +4,19 @@ import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
-import { useTranslation } from 'react-i18next';
 
 import { GridTableHead, EmptyGrid } from 'components';
-import { rowsPerPageConfig } from 'constant';
 import { SuperHeroGridItemList } from 'modules/super-hero/components';
 import { useSuperHero } from 'modules/super-hero/hooks/useSuperHero';
 import { SuperHero } from 'modules/super-hero/interfaces/superHero';
 import { PageConfig } from 'interfaces';
+import { useCustomTranslate } from 'hooks';
 
-export const SuperHeroGrid = () => {
-  const { t: translate } = useTranslation();
+interface SuperHeroGridProps {
+  count: number;
+}
+
+export const SuperHeroGrid = ({ count }: SuperHeroGridProps) => {
   const {
     columns,
     page,
@@ -27,8 +29,9 @@ export const SuperHeroGrid = () => {
     onAddOrEditOrView,
     dispatch,
   } = useSuperHero();
-  const paginationConfig = [...rowsPerPageConfig, { value: -1, label: translate('globals.paginationAllOption') }];
-
+  const { rowPerpageTranslate } = useCustomTranslate();
+  const rowsPerPageConfig = rowPerpageTranslate(); 
+  
   const handleRequestSort = (_event: MouseEvent<unknown>, property: keyof SuperHero) => {
     const isAsc = orderBy === property && order === 'asc';
     setPageConfig({ ...pageConfig, order: isAsc ? 'desc' : 'asc', orderBy: property });
@@ -70,9 +73,9 @@ export const SuperHeroGrid = () => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={paginationConfig}
+        rowsPerPageOptions={rowsPerPageConfig}
         component="div"
-        count={20}
+        count={count}
         rowsPerPage={rowsPerPage}
         page={rows?.length <= 0 ? 0 : page}
         onPageChange={handleChangePage}
