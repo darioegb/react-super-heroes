@@ -1,25 +1,11 @@
 import { AxiosInstance } from 'axios';
-import { HttpMethod, Order } from 'types';
-
-export interface ServerPaginationConfig {
-  _page?: number;
-  _limit?: number;
-  _sort?: string;
-  _order?: Order;
-  name_like?: string;
-}
-
-export interface HttpConfig {
-  headers?: Record<string, string | number | boolean>;
-  params?: ServerPaginationConfig;
-}
-
+import { HttpMethod } from 'types';
 export interface FetchConfig<T> {
   instance: AxiosInstance;
   url: string;
   method: HttpMethod;
   data?: T;
-  config?: HttpConfig;
+  config?: Record<string, Record<string, unknown>>;
 }
 
 export interface FetchResponse<T> {

@@ -1,4 +1,4 @@
-import { Option, PageConfig, ServerPaginationConfig } from 'interfaces';
+import { Option, PageConfig } from 'interfaces';
 import { Order } from 'types';
 
 /**
@@ -33,8 +33,8 @@ export const stableSort = <T>(array: T[], comparator: (a: T, b: T) => number) =>
 
 export const createHttpParams = <T>(
   pageConfig: PageConfig<T>
-): ServerPaginationConfig => {
-  let params: ServerPaginationConfig = {};
+) => {
+  let params: Record<string, unknown> = {};
   const { order, page, rowsPerPage, orderBy, filter } = pageConfig;
   
   if (rowsPerPage < 0) {

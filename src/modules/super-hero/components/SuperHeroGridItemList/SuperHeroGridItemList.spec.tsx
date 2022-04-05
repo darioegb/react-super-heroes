@@ -2,7 +2,31 @@ import { render } from '@testing-library/react';
 
 import { SuperHeroGridItemList } from './SuperHeroGridItemList';
 import { SuperHeroProvider } from 'modules/super-hero/context';
-import { GenreEnum } from 'constant';
+
+const mockFn = jest.fn();
+jest.mock('../../hooks/useSuperHero', () => ({
+  useSuperHero: () => ({
+    dispatch: mockFn,
+    rowsPerPage: 5,
+    orderBy: 'id',
+    order: 'asc',
+    superHeroes: [
+      {
+        id: '1',
+        name: 'test',
+        genre: 1,
+        specialty: 'test superHero',
+      },
+    ],
+    columns: [
+      { id: 'name', label: 'Name' },
+      { id: 'genre', label: 'Genre' },
+      { id: 'specialty', label: 'Specialty' },
+    ],
+    onAddOrEditOrView: mockFn,
+    onDelete: mockFn,
+  }),
+}));
 
 describe('SuperHeroGridItemList', () => {
   it('should render SuperHeroGridItemList', () => {
@@ -11,29 +35,12 @@ describe('SuperHeroGridItemList', () => {
         children={
           <table>
             <tbody>
-              <SuperHeroGridItemList
-                filteredRows={[{ id: '1', name: 'test', genre: GenreEnum.Male, specialty: 'test superHero' }]}
-              />
+              <SuperHeroGridItemList />
             </tbody>
           </table>
         }
       />,
     );
-    expect(container.querySelectorAll('td').length).toBeGreaterThan(4);
-  });
-
-  it('should render SuperHeroGridItemList without filter', () => {
-    const { container } = render(
-      <SuperHeroProvider
-        children={
-          <table>
-            <tbody>
-              <SuperHeroGridItemList filteredRows={undefined} />
-            </tbody>
-          </table>
-        }
-      />,
-    );
-    expect(container.querySelectorAll('td').length).toBe(0);
+    expect(container.querySelectorAll('td').length).toBe(4);
   });
 });

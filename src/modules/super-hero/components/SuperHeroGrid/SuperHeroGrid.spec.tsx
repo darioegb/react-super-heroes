@@ -49,24 +49,24 @@ describe('SuperHeroGrid', () => {
   };
 
   it('should render SuperHeroGrid', () => {
-    const { container } = render(<SuperHeroProviderHost children={<SuperHeroGrid />} />);
+    const { container } = render(<SuperHeroProviderHost children={<SuperHeroGrid count={6} />} />);
     expect(container).toMatchSnapshot();
   });
 
   it('should render SuperHeroGrid without data when not exist data', () => {
-    const { container } = render(<SuperHeroProvider children={<SuperHeroGrid />} />);
+    const { container } = render(<SuperHeroProvider children={<SuperHeroGrid count={6} />} />);
     expect(container.querySelectorAll('tr').length).toBe(2);
   });
 
   it('should cahnge sort when click on any colunm', () => {
-    render(<SuperHeroProviderHost children={<SuperHeroGrid />} />);
+    render(<SuperHeroProviderHost children={<SuperHeroGrid count={6} />} />);
     const sort = screen.getByText('Name');
     fireEvent.click(sort);
     expect(mockDispatch).toHaveBeenCalled();
   });
 
   it('should change page when click o next page button', () => {
-    const { container } = render(<SuperHeroProviderHost children={<SuperHeroGrid />} />);
+    const { container } = render(<SuperHeroProviderHost children={<SuperHeroGrid count={6} />} />);
     const button = container.querySelector('button[aria-label="Go to next page"]');
     button && fireEvent.click(button);
     expect(mockDispatch).toHaveBeenCalled();

@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 
 import { instances } from 'config/httpCommon';
 import { GenreEnum } from 'constant';
-import { getAll } from 'utils';
+import { fetch } from 'utils';
 import { useAxiosLoader } from './useAxiosLoader';
 
 jest.mock('http', () => {
@@ -37,7 +37,7 @@ describe('useAxiosLoader', () => {
     // Now mock axios get method
     instance.get = jest.fn().mockResolvedValueOnce(payload);
     const { result } = renderHook(() => useAxiosLoader());
-    const { data } = await getAll('/superHero');
+    const { data } = await fetch({instance, url: 'superHeroes', method: 'get'});
     expect(data).toEqual(superHero);
     expect(result.current[0]).not.toBeTruthy();
   });

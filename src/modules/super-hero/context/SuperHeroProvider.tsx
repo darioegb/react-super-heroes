@@ -57,7 +57,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
     const { isError } = await fetch({
       instance,
       url: `superHeroes/${id}`,
-      method: 'put',
+      method: 'delete',
       data: id,
     });
 
