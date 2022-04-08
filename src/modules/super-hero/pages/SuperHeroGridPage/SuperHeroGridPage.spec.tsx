@@ -1,6 +1,5 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
-import { instances } from 'config/httpCommon';
 import { SuperHeroProvider } from 'modules/super-hero/context';
 import { SuperHeroGridPage } from './SuperHeroGridPage';
 
@@ -15,7 +14,8 @@ const initialPageConfig = {
 
 jest.mock('../../hooks/useSuperHero', () => ({
   useSuperHero: () => ({
-    dispatch: mockFn,
+    setPageConfig: jest.fn(),
+    getPage: mockFn,
     page: initialPageConfig.page,
     rowsPerPage: initialPageConfig.rowsPerPage,
     orderBy: initialPageConfig.orderBy,
@@ -26,15 +26,8 @@ jest.mock('../../hooks/useSuperHero', () => ({
 }));
 
 describe('SuperHeroGridPage', () => {
-  const [instance] = instances;
-  it('should render SuperHeroGridPage', () => {
-    const { container } = render(
-      <SuperHeroProvider children={<SuperHeroGridPage />} />,
-    );
-    expect(container).toMatchSnapshot();
-  });
   it('should change filter value when the input value is changed', async () => {
-    instance.get = jest.fn().mockResolvedValueOnce([]);
+    mockFn.mockResolvedValueOnce(10);
     const { container } = render(
       <SuperHeroProvider children={<SuperHeroGridPage />} />,
     );

@@ -1,14 +1,22 @@
-import { useReducer } from 'react';
+import { useCallback, useReducer } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
-import { anchorOrigin, defaultPageConfig, GenreEnum } from 'constant';
-import { Column } from 'interfaces';
-import { SuperHero, SuperHeroState } from 'modules/super-hero/interfaces/superHero';
+import {
+  anchorOrigin,
+  defaultPageConfig,
+  GenreEnum,
+  httpMethodKeys,
+} from 'constant';
+import { Column, PageConfig } from 'interfaces';
+import {
+  SuperHero,
+  SuperHeroState,
+} from 'modules/super-hero/interfaces/superHero';
 import { superHeroReducer } from 'modules/super-hero/store/superHeroReducer';
 import { SuperHeroContext } from './SuperHeroContext';
-import { fetch } from 'utils';
+import { createHttpParams, fetch } from 'utils';
 import { useCustomTranslate } from 'hooks';
 import { instances } from 'config/httpCommon';
 
@@ -22,10 +30,11 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
   const history = useHistory();
   const { dropdownTranslate } = useCustomTranslate();
   const [instance] = instances;
+  const resourceUrl = 'superHeroes';
 
   const initialState: SuperHeroState = {
     superHeroes: [],
-    selectedSuperHero: null,
+    selectedSuperHero: undefined,
     pageConfig: defaultPageConfig,
   };
   const columns: Column<SuperHero>[] = [
@@ -33,9 +42,13 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
     {
       id: 'genre',
       label: translate('superHeroes.grid.columns.genre'),
-      format: (value: number) => dropdownTranslate('globals.enums.genres', value, GenreEnum),
+      format: (value: number) =>
+        dropdownTranslate('globals.enums.genres', value, GenreEnum),
     },
-    { id: 'specialty', label: translate('superHeroes.grid.columns.specialty') },
+    {
+      id: 'specialty',
+      label: translate('superHeroes.grid.columns.specialty'),
+    },
     { id: 'age', label: translate('superHeroes.grid.columns.age') },
     { id: 'height', label: translate('superHeroes.grid.columns.height') },
     { id: 'weight', label: translate('superHeroes.grid.columns.weight') },
@@ -44,7 +57,10 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
 
   const onAddOrEditOrView = (item?: SuperHero, view = false) => {
     if (item) {
-      dispatch({ type: '[SuperHero] set selected', payload: { superHero: item } });
+      dispatch({
+        type: '[SuperHero] set selected',
+        payload: { superHero: item },
+      });
       history.push(`/superheroes/detail/${item?.id}`, { view });
       return;
     }
@@ -56,7 +72,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
 
     const { isError } = await fetch({
       instance,
-      url: `superHeroes/${id}`,
+      url: `${resourceUrl}/${id}`,
       method: 'delete',
       data: id,
     });
@@ -75,6 +91,74 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
     });
   };
 
+  const getPage = useCallback(
+    async (pageConfig: PageConfig<SuperHero>) => {
+      const { isError, data, count } = await fetch<SuperHero[]>({
+        instance,
+        url: resourceUrl,
+        method: 'get',
+        config: {
+          params: createHttpParams<SuperHero>(pageConfig),
+        },
+      });
+      const dataLength = data?.length || 100;
+      dispatch({
+        type: '[SuperHero] get page',
+        payload: { superHeroes: isError || !data ? [] : data },
+      });
+      return count || dataLength;
+    },
+    [instance],
+  );
+
+  const setPageConfig = (pageConfig: PageConfig<SuperHero>) => {
+    dispatch({
+      type: '[SuperHero] set page config',
+      payload: { pageConfig },
+    });
+  };
+
+  const saveOrUpdate = async (
+    opType: string,
+    superHero: SuperHero,
+    selectedSuperHero?: SuperHero,
+  ) => {
+    const { isError, data } =
+      opType === httpMethodKeys.put
+        ? await fetch<SuperHero>({
+            instance,
+            url: `${resourceUrl}/${selectedSuperHero?.id}`,
+            method: 'put',
+            data: { ...selectedSuperHero, ...superHero },
+          })
+        : await fetch<SuperHero>({
+            instance,
+            url: resourceUrl,
+            method: 'post',
+            data: superHero,
+          });
+
+    if (isError || !data) {
+      enqueueSnackbar(translate(`superHeroes.toasts.${opType}.error`), {
+        variant: 'error',
+        anchorOrigin,
+      });
+      return;
+    }
+
+    dispatch({
+      type:
+        opType === httpMethodKeys.put
+          ? '[SuperHero] update'
+          : '[SuperHero] create',
+      payload: { superHero: data },
+    });
+    enqueueSnackbar(translate(`superHeroes.toasts.${opType}.success`), {
+      variant: 'success',
+      anchorOrigin,
+    });
+  };
+
   return (
     <SuperHeroContext.Provider
       value={{
@@ -82,7 +166,9 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
         columns,
         onAddOrEditOrView,
         onDelete,
-        dispatch,
+        getPage,
+        setPageConfig,
+        saveOrUpdate,
       }}
     >
       {children}

@@ -2,6 +2,8 @@ import { TextField } from '@mui/material';
 import { HTMLInputTypeAttribute } from 'react';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 
+import { StringOrNumber } from 'types';
+
 interface TextfieldControllerProps {
   name: string;
   control: Control<FieldValues, object>;
@@ -13,7 +15,7 @@ interface TextfieldControllerProps {
   disabled?: boolean;
   type?: HTMLInputTypeAttribute;
   multiline?: boolean;
-  rows?: string | number;
+  rows?: StringOrNumber;
 }
 
 export const TextfieldController = ({

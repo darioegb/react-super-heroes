@@ -14,20 +14,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { Option } from 'interfaces';
-import { convertEnumToKeyValueArray, fetch } from 'utils';
-import { anchorOrigin, GenreEnum, httpMethodKeys, regExp } from 'constant';
+import { convertEnumToKeyValueArray } from 'utils';
+import { GenreEnum, httpMethodKeys, regExp } from 'constant';
 import { SuperHero } from 'modules/super-hero/interfaces/superHero';
 import { useSuperHero } from 'modules/super-hero/hooks/useSuperHero';
-import { useSnackbar } from 'notistack';
 import { SelectController, TextfieldController } from 'components';
-import { instances } from 'config/httpCommon';
 
 export const SuperHeroDetailPage = () => {
   const { t: translate } = useTranslation();
   const history = useHistory();
-  const { enqueueSnackbar } = useSnackbar();
   const genres: Option[] = convertEnumToKeyValueArray(GenreEnum);
-  const { selectedSuperHero, dispatch } = useSuperHero();
+  const { selectedSuperHero, saveOrUpdate } = useSuperHero();
   const schema = yup
     .object({
       name: yup
@@ -45,10 +42,17 @@ export const SuperHeroDetailPage = () => {
         .required(translate('validations.required')),
       age: yup
         .number()
+        .typeError(translate('validations.required'))
         .positive(translate('validations.pattern.positive'))
         .integer(),
-      height: yup.number().positive(translate('validations.pattern.positive')),
-      weight: yup.number().positive(translate('validations.pattern.positive')),
+      height: yup
+        .number()
+        .typeError(translate('validations.required'))
+        .positive(translate('validations.pattern.positive')),
+      weight: yup
+        .number()
+        .typeError(translate('validations.required'))
+        .positive(translate('validations.pattern.positive')),
     })
     .required();
   const {
@@ -61,50 +65,14 @@ export const SuperHeroDetailPage = () => {
   });
 
   const [view, setView] = useState(false);
-  const [instance] = instances;
 
   useEffect(() => {
     setView((history.location.state as { view: boolean })?.view);
   }, [history, setView]);
 
   const onSubmit = async (value: unknown) => {
-    const superHero = value as SuperHero;
     const opType = selectedSuperHero ? httpMethodKeys.put : httpMethodKeys.post;
-    const { isError, data } =
-      opType === httpMethodKeys.put
-        ? await fetch<SuperHero>({
-            instance,
-            url: `superHeroes/${selectedSuperHero?.id}`,
-            method: 'put',
-            data: { ...selectedSuperHero, ...superHero },
-          })
-        : await fetch<SuperHero>({
-            instance,
-            url: 'superHeroes',
-            method: 'post',
-            data: superHero,
-          });
-
-    if (isError || !data) {
-      enqueueSnackbar(translate(`superHeroes.toasts.${opType}.error`), {
-        variant: 'error',
-        anchorOrigin,
-      });
-      handleReturn();
-      return;
-    }
-
-    dispatch({
-      type:
-        opType === httpMethodKeys.put
-          ? '[SuperHero] update'
-          : '[SuperHero] create',
-      payload: { superHero: data },
-    });
-    enqueueSnackbar(translate(`superHeroes.toasts.${opType}.success`), {
-      variant: 'success',
-      anchorOrigin,
-    });
+    await saveOrUpdate(opType, value as SuperHero, selectedSuperHero);
     handleReturn();
   };
 

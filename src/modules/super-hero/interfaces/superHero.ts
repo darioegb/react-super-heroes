@@ -1,6 +1,5 @@
 import { GenreEnum } from 'constant';
 import { PageConfig } from 'interfaces';
-import { GenericOrNull } from 'types';
 
 export interface SuperHero {
   id?: string;
@@ -14,6 +13,6 @@ export interface SuperHero {
 
 export interface SuperHeroState {
   superHeroes: SuperHero[];
-  selectedSuperHero: GenericOrNull<SuperHero>;
   pageConfig: PageConfig<SuperHero>;
+  selectedSuperHero?: SuperHero;
 }

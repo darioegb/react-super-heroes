@@ -21,14 +21,14 @@ export const superHeroReducer = (state: SuperHeroState, action: SuperHeroAction)
       return {
         ...state,
         superHeroes: state.superHeroes.filter(({ ...superHero }) => superHero.id && superHero.id !== action.payload.id),
-        selectedSuperHero: null,
+        selectedSuperHero: undefined,
       };
 
     case '[SuperHero] get page':
       return {
         ...state,
         superHeroes: [...action.payload.superHeroes],
-        selectedSuperHero: null,
+        selectedSuperHero: undefined,
       };
 
     case '[SuperHero] set selected':

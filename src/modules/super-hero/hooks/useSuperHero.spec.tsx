@@ -8,13 +8,14 @@ describe('useSuperHero', () => {
 
   it('should return false when not exist http request', () => {
     const { result } = renderHook(() => useSuperHero(), { wrapper });
-    const { pageConfig, selectedSuperHero, superHeroes, columns, dispatch, onDelete, onAddOrEditOrView } =
+    const { pageConfig, selectedSuperHero, superHeroes, columns, setPageConfig, getPage, onDelete, onAddOrEditOrView } =
       result.current;
     expect(typeof onDelete).toBe('function');
     expect(typeof onAddOrEditOrView).toBe('function');
-    expect(typeof dispatch).toBe('function');
+    expect(typeof setPageConfig).toBe('function');
+    expect(typeof getPage).toBe('function');
     expect(pageConfig).toBeDefined();
-    expect(selectedSuperHero).toBeNull();
+    expect(selectedSuperHero).toBeUndefined();
     expect(superHeroes.length).toBe(0);
     expect(columns).toBeDefined();
   });

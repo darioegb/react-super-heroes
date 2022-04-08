@@ -14,7 +14,7 @@ export const fetch = <T>({
     : instance[method](url, config as unknown as T & AxiosRequestConfig<T>)
         .then((response) => ({
           isError: false,
-          data: response.data,
+          ...(response.data && { data: response.data }),
           // x-total-change if parameter for json server can be changed
           count: response.headers
             ? +(response.headers as Record<string, string>)['x-total-count']

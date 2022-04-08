@@ -1,8 +1,16 @@
 import { useContext } from 'react';
-import { SuperHeroContext } from '../context/SuperHeroContext';
+import { SuperHeroContext } from 'modules/super-hero/context';
 
 export const useSuperHero = () => {
-  const { columns, superHeroState, dispatch, onDelete, onAddOrEditOrView } = useContext(SuperHeroContext);
+  const {
+    columns,
+    superHeroState,
+    onDelete,
+    onAddOrEditOrView,
+    getPage,
+    setPageConfig,
+    saveOrUpdate
+  } = useContext(SuperHeroContext);
   const {
     pageConfig: { page, rowsPerPage, order, orderBy, filter },
     pageConfig,
@@ -20,8 +28,10 @@ export const useSuperHero = () => {
     selectedSuperHero,
     superHeroes,
     pageConfig,
-    dispatch,
     onDelete,
     onAddOrEditOrView,
+    getPage,
+    setPageConfig,
+    saveOrUpdate
   };
 };
