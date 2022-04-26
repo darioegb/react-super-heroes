@@ -1,3 +1,6 @@
+import { firebaseStorage } from 'config/firebase';
+import { pictureBasePath } from 'constant';
+import { ref, StorageReference } from 'firebase/storage';
 import { Option, PageConfig } from 'interfaces';
 import { Order } from 'types';
 
@@ -30,6 +33,24 @@ export const stableSort = <T>(array: T[], comparator: (a: T, b: T) => number) =>
   });
   return stabilizedThis.map((el) => el[0]);
 };
+
+/**
+ * Convert file to base64 string.
+ * @param file File
+ * @returns Promise<unknown>
+ */
+ export const fileToBase64String = (file: File): Promise<string> => {
+  const reader = new FileReader();
+  return new Promise((resolve) => {
+    reader.readAsDataURL(file);
+    reader.onload = (): void => resolve(reader.result as string);
+  });
+};
+
+export const fileRef = (fileName: string): StorageReference =>
+  ref(firebaseStorage, `${pictureBasePath}/${fileName}`);
+
+export const fileName = (): string => `picture-${Date.now()}`;
 
 export const createHttpParams = <T>(
   pageConfig: PageConfig<T>

@@ -4,8 +4,45 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 h1 {
   font-size: 24px;
+}
+
+input[type='file'] {
+  color: transparent;
+  &::-webkit-file-upload-button {
+    border: none;
+    color: rgba(0, 0, 0, 0.6);
+    text-align: start;
+    background-color: transparent;
+  }
+}
+
+td,
+th {
+  /* don't shorten cell contents */
+  white-space: break-spaces;
+  max-width: 10rem;
+
+  @media (max-width: 900px) {
+    overflow: scroll;
+    hyphens: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #ddd;
+    background: black;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    color: #333;
+    background-color: whitesmoke;
+  }
 }

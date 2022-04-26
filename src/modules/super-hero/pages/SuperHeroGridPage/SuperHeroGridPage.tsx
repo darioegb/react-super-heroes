@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Grid } from '@mui/material';
+import { Paper, Toolbar, Typography } from '@mui/material';
 
 import { FilterGrid } from 'components';
 import { SuperHeroGrid } from 'modules/super-hero/components';
@@ -29,18 +29,14 @@ export const SuperHeroGridPage = () => {
   };
 
   return (
-    <Grid container spacing={2} direction='column'>
-      <Grid item display='flex' alignItems='center'>
-        <Grid item xs={6}>
+    <Paper>
+      <Toolbar>
+        <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
           {translate('superHeroes.title')}
-        </Grid>
-        <Grid item xs={6} display='flex' justifyContent='flex-end'>
-          <FilterGrid handleChange={handleChange} />
-        </Grid>
-      </Grid>
-      <Grid item>
-        <SuperHeroGrid count={count} />
-      </Grid>
-    </Grid>
+        </Typography>
+        <FilterGrid handleChange={handleChange} />
+      </Toolbar>
+      <SuperHeroGrid count={count} />
+    </Paper>
   );
 };

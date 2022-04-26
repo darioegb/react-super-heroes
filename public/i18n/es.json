@@ -8,7 +8,8 @@
         "genre": "Genero",
         "specialty": "Especialidad",
         "height": "Altura",
-        "weight": "Peso"
+        "weight": "Peso",
+        "picture": "Foto"
       }
     },
     "detail": {
@@ -20,8 +21,7 @@
         "specialtyPlaceHolder": "Ej. Puede volar",
         "heightPlaceholder": "Ej. 1.70m",
         "weightPlaceholder": "Ej. 70kg"
-      },
-      "previewCardTitle": "Vista previa"
+      }
     },
     "toasts": {
       "create": {
@@ -49,12 +49,17 @@
       },
       "noMatchingDataText": "No hay datos que coincidan con el filtro {{value}}"
     },
+    "detail": {
+      "previewCardTitle": "Vista previa",
+      "fileupload": "Subir archivo"
+    },
     "buttons": {
       "confirm": "Confirmar",
       "cancel": "Cancelar",
       "save": "Guardar",
       "edit": "Editar",
       "delete": "Borrar",
+      "reset": "Limpiar",
       "view": "Ver"
     },
     "enums": {
@@ -77,6 +82,7 @@
     "email": "No es un correo electrónico válido.",
     "min": "El mínimo permitido es {{param}}.",
     "max": "El máximo permitido es {{param}}.",
+    "fileSize": "El archivo es muy grande",
     "pattern": {
       "numeric": "El formato válido es numérico.",
       "alphabet": "El formato válido es alfabético.",

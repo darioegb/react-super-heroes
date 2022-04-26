@@ -20,3 +20,4 @@ export const regExp = {
   alphabet: /^[A-Za-z ]*$/,
 };
 export const anchorOrigin: SnackbarOrigin = { horizontal: 'right', vertical: 'top' };
+export const pictureBasePath = 'pictures';

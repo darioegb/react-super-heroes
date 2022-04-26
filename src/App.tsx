@@ -8,14 +8,14 @@ import { AppRouter } from 'routes';
 
 const App = () => {
   return (
-    <div className="App">
-      <SnackbarProvider maxSnack={3}>
-        <Suspense fallback={<CircularProgress />}>
-          <Title />
-          <GlobalLoader />
-          <AppRouter />
-        </Suspense>
-      </SnackbarProvider>
+    <div className='App'>
+        <SnackbarProvider maxSnack={3}>
+          <Suspense fallback={<CircularProgress />}>
+            <Title />
+            <GlobalLoader />
+            <AppRouter />
+          </Suspense>
+        </SnackbarProvider>
     </div>
   );
 };

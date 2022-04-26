@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
+import { GridItemList } from 'components';
 
-import { SuperHeroGridItemList } from './SuperHeroGridItemList';
 import { SuperHeroProvider } from 'modules/super-hero/context';
 
 const mockFn = jest.fn();
@@ -34,7 +34,7 @@ describe('SuperHeroGridItemList', () => {
         children={
           <table>
             <tbody>
-              <SuperHeroGridItemList />
+              <GridItemList />
             </tbody>
           </table>
         }

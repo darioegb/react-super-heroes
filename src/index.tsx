@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ThemeProvider } from '@mui/material';
 
 import './styles.scss';
 import App from './App';
+import SystemTheme  from 'config/SystemTheme';
 import reportWebVitals from './reportWebVitals';
 import './config/i18n';
-import { theme } from 'config/theme';
+import './config/firebase';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
+    <SystemTheme>
       <App />
-    </ThemeProvider>
+    </SystemTheme>
   </React.StrictMode>,
   document.getElementById('root'),
 );

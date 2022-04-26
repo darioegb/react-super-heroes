@@ -8,7 +8,8 @@
         "genre": "Genre",
         "specialty": "Specialty",
         "height": "Height",
-        "weight": "Weight"
+        "weight": "Weight",
+        "picture": "Picture"
       }
     },
     "detail": {
@@ -20,8 +21,7 @@
         "specialtyPlaceHolder": "Ex. Can fly",
         "heightPlaceholder": "Ex. 1.70m",
         "weightPlaceholder": "Ex. 70kg"
-      },
-      "previewCardTitle": "Preview"
+      }
     },
     "toasts": {
       "create": {
@@ -49,12 +49,17 @@
       },
       "noMatchingDataText": "No data matching the filter {{value}}"
     },
+    "detail": {
+      "previewCardTitle": "Preview",
+      "fileupload": "File upload"
+    },
     "buttons": {
       "confirm": "Confirm",
       "cancel": "Cancel",
       "save": "Save",
       "edit": "Edit",
       "delete": "Delete",
+      "reset": "Reset",
       "view": "View"
     },
     "enums": {
@@ -72,11 +77,12 @@
   },
   "validations": {
     "required": "The field is required.",
-    "maxlength": "The maximum length allowed is {{param}}.",
-    "minlength": "The minimum allowed length is {{param}}.",
+    "maxLength": "The maximum length allowed is {{param}}.",
+    "minLength": "The minimum allowed length is {{param}}.",
     "email": "It is not a valid email.",
     "min": "The minimum allowed is {{param}}.",
     "max": "The maximum allowed is {{param}}.",
+    "fileSize": "The file is too large",
     "pattern": {
       "numeric": "The valid format is numeric.",
       "alphabet": "The valid format is alphabetical.",

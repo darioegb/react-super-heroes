@@ -1,8 +1,7 @@
 import { GenreEnum } from 'constant';
 import { PageConfig } from 'interfaces';
 
-export interface SuperHero {
-  id?: string;
+interface SuperHeroCommons {
   name: string;
   genre: GenreEnum;
   specialty: string;
@@ -10,7 +9,14 @@ export interface SuperHero {
   height?: number;
   weight?: number;
 }
+export interface SuperHero extends SuperHeroCommons {
+  id?: string;
+  picture?: string;
+}
 
+export interface SuperHeroForm extends SuperHeroCommons {
+  picture?: File[];
+}
 export interface SuperHeroState {
   superHeroes: SuperHero[];
   pageConfig: PageConfig<SuperHero>;

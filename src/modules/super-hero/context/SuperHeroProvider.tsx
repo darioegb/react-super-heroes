@@ -52,6 +52,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
     { id: 'age', label: translate('superHeroes.grid.columns.age') },
     { id: 'height', label: translate('superHeroes.grid.columns.height') },
     { id: 'weight', label: translate('superHeroes.grid.columns.weight') },
+    { id: 'picture', label: translate('superHeroes.grid.columns.picture'), isImg: true },
   ];
   const [superHeroState, dispatch] = useReducer(superHeroReducer, initialState);
 

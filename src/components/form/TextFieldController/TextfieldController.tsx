@@ -16,6 +16,8 @@ interface TextfieldControllerProps {
   type?: HTMLInputTypeAttribute;
   multiline?: boolean;
   rows?: StringOrNumber;
+  uppercase?: boolean;
+  characterLimit?: number;
 }
 
 export const TextfieldController = ({
@@ -30,6 +32,8 @@ export const TextfieldController = ({
   type,
   multiline,
   rows,
+  uppercase,
+  characterLimit,
 }: TextfieldControllerProps) => {
   return (
     <Controller
@@ -45,10 +49,19 @@ export const TextfieldController = ({
           inputProps={{ type: type || 'text' }}
           variant={variant || 'standard'}
           error={!!error}
-          helperText={error?.message}
+          helperText={
+            characterLimit && !error
+              ? `${field.value.length}/${characterLimit}`
+              : error?.message
+          }
           multiline={multiline}
           rows={rows}
           disabled={disabled}
+          onChange={(event) =>
+            field.onChange(
+              uppercase ? event.target.value.toUpperCase() : event.target.value,
+            )
+          }
         />
       )}
     />

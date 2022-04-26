@@ -18,23 +18,49 @@ export const GridItem = <T extends unknown>({
   onDelete,
 }: GridItemProps<T>) => {
   return (
-    <TableRow hover role="checkbox" tabIndex={-1}>
+    <TableRow hover role='checkbox' tabIndex={-1}>
       {columns.map((column) => {
         const value = row[column.id];
         return (
           <TableCell key={column.id} align={column.align}>
-            {column.format && typeof value === 'number' ? column.format(value) : value || '-'}
+            {!column.isImg ? (
+              column.format && typeof value === 'number' ? (
+                column.format(value)
+              ) : (
+                value || '-'
+              )
+            ) : (
+              <img
+                style={{ maxWidth: '5rem' }}
+                alt='item or alt'
+                src={
+                  (value as unknown as string) ||
+                  `${process.env.PUBLIC_URL}/img/no-image.png`
+                }
+              />
+            )}
           </TableCell>
         );
       })}
       <TableCell>
-        <IconButton aria-label="visibility" onClick={() => onAddOrEditOrView(row, true)}>
+        <IconButton
+          aria-label='visibility'
+          onClick={() => onAddOrEditOrView(row, true)}
+        >
           <VisibilityIcon />
         </IconButton>
-        <IconButton aria-label="edit" onClick={() => onAddOrEditOrView(row)}>
+        <IconButton
+          color='primary'
+          aria-label='edit'
+          onClick={() => onAddOrEditOrView(row)}
+        >
           <EditIcon />
         </IconButton>
-        <IconButton aria-label="delete" onClick={() => onDelete(row)}>
+        <IconButton
+          color='error'
+          aria-label='delete'
+          onClick={() => onDelete(row)}
+        >
           <DeleteIcon />
         </IconButton>
       </TableCell>

@@ -5,8 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
 
-import { GridTableHead, EmptyGrid } from 'components';
-import { SuperHeroGridItemList } from 'modules/super-hero/components';
+import { GridTableHead, EmptyGrid, GridItemList, GridItem } from 'components';
 import { useSuperHero } from 'modules/super-hero/hooks/useSuperHero';
 import { SuperHero } from 'modules/super-hero/interfaces/superHero';
 import { useCustomTranslate } from 'hooks';
@@ -27,6 +26,7 @@ export const SuperHeroGrid = ({ count }: SuperHeroGridProps) => {
     superHeroes: rows,
     onAddOrEditOrView,
     setPageConfig,
+    onDelete,
   } = useSuperHero();
   const { rowPerpageTranslate } = useCustomTranslate();
   const rowsPerPageConfig = rowPerpageTranslate();
@@ -64,7 +64,20 @@ export const SuperHeroGrid = ({ count }: SuperHeroGridProps) => {
           />
           <TableBody>
             {rows?.length ? (
-              <SuperHeroGridItemList />
+              <GridItemList
+                rows={rows}
+                order={order}
+                orderBy={orderBy}
+                renderItem={item => (
+                  <GridItem
+                    key={item.name}
+                    row={item}
+                    columns={columns}
+                    onAddOrEditOrView={onAddOrEditOrView}
+                    onDelete={onDelete}
+                  />
+                )}
+              />
             ) : (
               <EmptyGrid value={filter} />
             )}

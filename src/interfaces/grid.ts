@@ -7,6 +7,7 @@ export interface Column<T> {
   minWidth?: number;
   align?: 'right';
   format?: (value: number) => string;
+  isImg?: boolean;
 }
 
 export interface PageConfig<T> {

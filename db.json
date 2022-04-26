@@ -4,16 +4,18 @@
       "id": 1,
       "name": "SPIDERMAN",
       "genre": 1,
-      "specialty": "esto es una prueba 1",
+      "specialty": "Fuerza, rapidez y reflejos proporcionales a una araña. Capacidad de adherirse a casi cualquier superficie. Factor de curación acelerado que le permite sanar huesos rotos o graves heridas en los tejidos en unas horas. Sentido arácnido que le advierte del peligro.",
       "age": 50,
       "height": 1.7,
-      "weight": 82
+      "weight": 82,
+      "picture": "https://firebasestorage.googleapis.com/v0/b/super-heroes-c3a1b.appspot.com/o/pictures%2Fpicture-1645188127132?alt=media&token=2a7d67d0-fcc3-4eda-be38-de3b9bcd994f"
     },
     {
       "id": 2,
       "name": "SUPERMAN",
       "genre": 1,
-      "specialty": "esto es una prueba 1"
+      "specialty": "esto es una prueba 1",
+      "picture": "https://firebasestorage.googleapis.com/v0/b/super-heroes-c3a1b.appspot.com/o/pictures%2Fpicture-1645703098163?alt=media&token=56efc94f-ccd3-4a9a-b1f6-87a0fff16882"
     },
     {
       "id": 3,
