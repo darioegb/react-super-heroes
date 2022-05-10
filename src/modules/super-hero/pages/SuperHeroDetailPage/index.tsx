@@ -8,7 +8,12 @@ import * as yup from 'yup';
 
 import { Option } from 'interfaces';
 import { convertEnumToKeyValueArray } from 'utils';
-import { GenreEnum, httpMethodKeys, regExp } from 'constant';
+import {
+  GenreEnum,
+  httpMethodKeys,
+  regExp,
+  defaultFormControlSizes,
+} from 'constant';
 import {
   SuperHero,
   SuperHeroForm,
@@ -22,40 +27,43 @@ import {
   FormImgUploadExpose,
 } from 'components';
 
+const { text, number, textarea } = defaultFormControlSizes;
+
 export const SuperHeroDetailPage = () => {
   const { t: translate } = useTranslation();
   const history = useHistory();
   const { selectedSuperHero, saveOrUpdate } = useSuperHero();
-  const [superHero, setSuperHero] = useState<SuperHero | undefined>(undefined);
+  const [superHero, setSuperHero] = useState<SuperHero>();
   const imgUploadRef = useRef<FormImgUploadExpose>(null);
   const schema = useMemo(
     () =>
       yup.object().shape({
         name: yup
           .string()
-          .matches(regExp.alphabet, translate('validations.pattern.alphabet'))
-          .required(translate('validations.required')),
+          .matches(regExp.alphabet)
+          .min(text.min)
+          .max(text.max)
+          .required(),
         genre: yup
           .mixed()
           .oneOf(Object.values(GenreEnum), translate('validations.required'))
           .required(),
-        specialty: yup
-          .string()
-          .min(10, translate('validations.minLength', { param: 10 }))
-          .max(250, translate('validations.maxLength', { param: 250 }))
-          .required(translate('validations.required')),
+        specialty: yup.string().min(textarea.min).max(textarea.max).required(),
         age: yup
           .number()
-          .positive(translate('validations.pattern.positive'))
+          .positive()
           .integer()
+          .min(number.min)
           .transform((value) => (isNaN(value) ? undefined : value)),
         height: yup
           .number()
-          .positive(translate('validations.pattern.positive'))
+          .positive()
+          .min(number.min)
           .transform((value) => (isNaN(value) ? undefined : value)),
         weight: yup
           .number()
-          .positive(translate('validations.pattern.positive'))
+          .positive()
+          .min(number.min)
           .transform((value) => (isNaN(value) ? undefined : value)),
         picture: yup
           .mixed()

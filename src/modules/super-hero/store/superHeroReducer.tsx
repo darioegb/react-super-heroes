@@ -17,7 +17,7 @@ export const superHeroReducer = (state: SuperHeroState, action: SuperHeroAction)
         ),
       };
 
-    case '[SuperHero] remove':
+    case '[SuperHero] delete':
       return {
         ...state,
         superHeroes: state.superHeroes.filter(({ ...superHero }) => superHero.id && superHero.id !== action.payload.id),

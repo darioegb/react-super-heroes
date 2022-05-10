@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { SuperHeroGrid } from './SuperHeroGrid';
+import { SuperHeroGrid } from '.';
 import {
   SuperHeroContext,
   SuperHeroProvider,

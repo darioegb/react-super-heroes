@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { FilterGrid } from './FilterGrid';
+import { FilterGrid } from '.';
 
 describe('FilterGrid', () => {
   it('should render FilterGrid', () => {

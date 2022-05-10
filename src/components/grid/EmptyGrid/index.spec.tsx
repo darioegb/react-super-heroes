@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { EmptyGrid } from './EmptyGrid';
+import { EmptyGrid } from '.';
 
 describe('EmptyGrid', () => {
   it('should render EmptyGrid', () => {

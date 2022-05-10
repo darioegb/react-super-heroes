@@ -1,2 +1,2 @@
-export * from './SuperHeroDetailPage/SuperHeroDetailPage';
-export * from './SuperHeroGridPage/SuperHeroGridPage';
+export * from './SuperHeroDetailPage';
+export * from './SuperHeroGridPage';

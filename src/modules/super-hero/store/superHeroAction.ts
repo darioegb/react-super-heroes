@@ -7,4 +7,4 @@ export type SuperHeroAction =
   | { type: '[SuperHero] get page'; payload: { superHeroes: SuperHero[] } }
   | { type: '[SuperHero] create'; payload: { superHero: SuperHero } }
   | { type: '[SuperHero] update'; payload: { superHero: SuperHero } }
-  | { type: '[SuperHero] remove'; payload: { id: string } };
+  | { type: '[SuperHero] delete'; payload: { id: string } };

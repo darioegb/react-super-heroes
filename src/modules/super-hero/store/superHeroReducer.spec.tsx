@@ -4,7 +4,7 @@ import { superHeroReducer } from './superHeroReducer';
 
 const initialState: SuperHeroState = {
   superHeroes: [],
-  selectedSuperHero: null,
+  selectedSuperHero: undefined,
   pageConfig: defaultPageConfig,
 };
 
@@ -40,7 +40,7 @@ describe('superHeroReducer', () => {
     const state = superHeroReducer(
       { ...initialState, superHeroes: [{ ...mockSuperHero, id: '1' }] },
       {
-        type: '[SuperHero] remove',
+        type: '[SuperHero] delete',
         payload: { id: '1' },
       },
     );

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { GlobalLoader } from './GlobalLoader';
+import { GlobalLoader } from '.';
 
 jest.mock('hooks', () => ({
   useAxiosLoader: () => [true],

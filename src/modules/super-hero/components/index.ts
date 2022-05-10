@@ -1,1 +1,1 @@
-export * from './SuperHeroGrid/SuperHeroGrid';
+export * from './SuperHeroGrid';

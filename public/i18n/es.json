@@ -13,7 +13,7 @@
       }
     },
     "detail": {
-      "title": "SuperHeroe",
+      "title": "Superhéroe",
       "form": {
         "agePlaceholder": "Ej. 50",
         "namePlaceholder": "Ej. Superman",
@@ -21,20 +21,6 @@
         "specialtyPlaceHolder": "Ej. Puede volar",
         "heightPlaceholder": "Ej. 1.70m",
         "weightPlaceholder": "Ej. 70kg"
-      }
-    },
-    "toasts": {
-      "create": {
-        "success": "El superheoe se agregó con éxito",
-        "error": "Ocurrió un error al agregar un superheroe"
-      },
-      "update": {
-        "success": "El superheoe fue actualizado con éxito",
-        "error": "Ocurrió un error al actualizar un superheroe"
-      },
-      "remove": {
-        "success": "El superheoe ha sido eliminado exitosamente",
-        "error": "Ocurrió un error al eliminar un superheroe"
       }
     }
   },
@@ -73,15 +59,34 @@
       "delete": {
         "title": "¿Esta seguro que desea eliminar a {{value}}?"
       }
+    },
+    "locales": {
+      "es": "Español",
+      "en": "Ingles"
+    },
+    "toasts": {
+      "create": {
+        "success": "{{value}} se agregó con éxito",
+        "error": "Ocurrió un error al agregar un {{value}}"
+      },
+      "update": {
+        "success": "{{value}} fue actualizado con éxito",
+        "error": "Ocurrió un error al actualizar un {{value}}"
+      },
+      "delete": {
+        "success": "{{value}} ha sido eliminado exitosamente",
+        "error": "Ocurrió un error al eliminar un {{value}}"
+      },
+      "imageError": "Ocurrió un error al subir la imagen"
     }
   },
   "validations": {
     "required": "El campo es obligatorio.",
-    "maxlength": "La longitud máxima permitida es {{param}}.",
-    "minlength": "La longitud mínima permitida es {{param}}.",
+    "maxLength": "La longitud máxima permitida es {{max}}.",
+    "minLength": "La longitud mínima permitida es {{min}}.",
     "email": "No es un correo electrónico válido.",
-    "min": "El mínimo permitido es {{param}}.",
-    "max": "El máximo permitido es {{param}}.",
+    "min": "El mínimo permitido es {{min}}.",
+    "max": "El máximo permitido es {{max}}.",
     "fileSize": "El archivo es muy grande",
     "pattern": {
       "numeric": "El formato válido es numérico.",

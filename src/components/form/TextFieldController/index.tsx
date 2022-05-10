@@ -1,4 +1,5 @@
 import { TextField } from '@mui/material';
+import { useCustomTranslate } from 'hooks';
 import { HTMLInputTypeAttribute } from 'react';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 
@@ -35,6 +36,8 @@ export const TextfieldController = ({
   uppercase,
   characterLimit,
 }: TextfieldControllerProps) => {
+  const { errorMessageTranslate } = useCustomTranslate();
+
   return (
     <Controller
       name={name}
@@ -52,15 +55,13 @@ export const TextfieldController = ({
           helperText={
             characterLimit && !error
               ? `${field.value.length}/${characterLimit}`
-              : error?.message
+              : errorMessageTranslate(error?.message)
           }
           multiline={multiline}
           rows={rows}
           disabled={disabled}
-          onChange={(event) =>
-            field.onChange(
-              uppercase ? event.target.value.toUpperCase() : event.target.value,
-            )
+          onChange={({ target: { value } }) =>
+            field.onChange(uppercase ? value.toUpperCase() : value)
           }
         />
       )}

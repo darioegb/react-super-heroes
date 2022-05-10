@@ -1,4 +1,6 @@
-.App {
-  padding: 1%;
+.app {
   height: 100vh;
+  &-body {
+    padding: 1rem;
+  }
 }

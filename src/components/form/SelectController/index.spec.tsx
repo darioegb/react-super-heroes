@@ -3,13 +3,21 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { TextfieldController } from './TextfieldController';
+import { convertEnumToKeyValueArray } from 'utils';
+import { SelectController } from '.';
 
-describe('TextfieldController', () => {
-  const TextfieldControllerHost = () => {
+describe('SelectController', () => {
+  enum TestEnum {
+    Test1 = 1,
+    Test2 = 2,
+    Test3 = 3,
+  }
+
+  const SelectControllerHost = () => {
+    const tests = convertEnumToKeyValueArray(TestEnum);
     const schema = yup
       .object({
-        test: yup.string().required('Error'),
+        test: yup.mixed().oneOf(Object.values(TestEnum), 'Error').required('Error'),
       })
       .required();
     const {
@@ -23,11 +31,15 @@ describe('TextfieldController', () => {
 
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
-        <TextfieldController
+        <SelectController
           name="test"
           control={control}
           defaultValue={undefined}
+          defaultSelectLabel="None"
           label="Test"
+          placeholder="Test"
+          options={tests}
+          optionLabels={{ path: 'globals.enums.test', type: TestEnum }}
           error={errors?.test}
           disabled={false}
         />
@@ -36,14 +48,14 @@ describe('TextfieldController', () => {
     );
   };
 
-  it('should render TextfieldController', () => {
-    const { container } = render(<TextfieldControllerHost />);
-    const textfield = container.querySelector('input');
-    expect(textfield).toBeInTheDocument();
+  it('should render SelectController', () => {
+    render(<SelectControllerHost />);
+    const select = screen.getByPlaceholderText('Test');
+    expect(select).toBeInTheDocument();
   });
 
-  it('should render TextfieldController with errors', async () => {
-    render(<TextfieldControllerHost />);
+  it('should render SelectController with errors', async () => {
+    render(<SelectControllerHost />);
     const submit = screen.getByText('SUBMIT');
     submit && fireEvent.click(submit);
     await waitFor(() => expect(screen.getByText('Error')).toBeInTheDocument());

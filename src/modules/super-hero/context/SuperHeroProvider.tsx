@@ -31,7 +31,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
   const { dropdownTranslate } = useCustomTranslate();
   const [instance] = instances;
   const resourceUrl = 'superHeroes';
-
+  const toastParam = translate('superHeroes.detail.title');
   const initialState: SuperHeroState = {
     superHeroes: [],
     selectedSuperHero: undefined,
@@ -52,7 +52,11 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
     { id: 'age', label: translate('superHeroes.grid.columns.age') },
     { id: 'height', label: translate('superHeroes.grid.columns.height') },
     { id: 'weight', label: translate('superHeroes.grid.columns.weight') },
-    { id: 'picture', label: translate('superHeroes.grid.columns.picture'), isImg: true },
+    {
+      id: 'picture',
+      label: translate('superHeroes.grid.columns.picture'),
+      isImg: true,
+    },
   ];
   const [superHeroState, dispatch] = useReducer(superHeroReducer, initialState);
 
@@ -79,17 +83,25 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
     });
 
     if (isError) {
-      enqueueSnackbar(translate('superHeroes.toasts.remove.error'), {
-        variant: 'error',
-        anchorOrigin,
-      });
+      enqueueSnackbar(
+        translate('globals.toasts.delete.error', {
+          value: toastParam.toLowerCase(),
+        }),
+        {
+          variant: 'error',
+          anchorOrigin,
+        },
+      );
       return;
     }
-    dispatch({ type: '[SuperHero] remove', payload: { id } });
-    enqueueSnackbar(translate('superHeroes.toasts.remove.success'), {
-      variant: 'success',
-      anchorOrigin,
-    });
+    dispatch({ type: '[SuperHero] delete', payload: { id } });
+    enqueueSnackbar(
+      translate('globals.toasts.delete.success', { value: toastParam }),
+      {
+        variant: 'success',
+        anchorOrigin,
+      },
+    );
   };
 
   const getPage = useCallback(
@@ -140,10 +152,15 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
           });
 
     if (isError || !data) {
-      enqueueSnackbar(translate(`superHeroes.toasts.${opType}.error`), {
-        variant: 'error',
-        anchorOrigin,
-      });
+      enqueueSnackbar(
+        translate(`globals.toasts.${opType}.error`, {
+          value: toastParam.toLowerCase(),
+        }),
+        {
+          variant: 'error',
+          anchorOrigin,
+        },
+      );
       return;
     }
 
@@ -154,10 +171,13 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
           : '[SuperHero] create',
       payload: { superHero: data },
     });
-    enqueueSnackbar(translate(`superHeroes.toasts.${opType}.success`), {
-      variant: 'success',
-      anchorOrigin,
-    });
+    enqueueSnackbar(
+      translate(`globals.toasts.${opType}.success`, { value: toastParam }),
+      {
+        variant: 'success',
+        anchorOrigin,
+      },
+    );
   };
 
   return (

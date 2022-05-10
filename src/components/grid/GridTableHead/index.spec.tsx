@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 
-import { GridTableHead } from './GridTableHead';
+import { GridTableHead } from '.';
 
 describe('GridTableHead', () => {
   const onAddOrEditOrView = jest.fn();

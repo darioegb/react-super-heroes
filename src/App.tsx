@@ -3,19 +3,21 @@ import { SnackbarProvider } from 'notistack';
 import { CircularProgress } from '@mui/material';
 
 import './App.scss';
-import { GlobalLoader, Title } from 'components';
+import { GlobalLoader, Navbar } from 'components';
 import { AppRouter } from 'routes';
 
 const App = () => {
   return (
-    <div className='App'>
-        <SnackbarProvider maxSnack={3}>
-          <Suspense fallback={<CircularProgress />}>
-            <Title />
-            <GlobalLoader />
+    <div className='app'>
+      <SnackbarProvider maxSnack={3}>
+        <Suspense fallback={<CircularProgress />}>
+          <Navbar />
+          <GlobalLoader />
+          <div className='app-body'>
             <AppRouter />
-          </Suspense>
-        </SnackbarProvider>
+          </div>
+        </Suspense>
+      </SnackbarProvider>
     </div>
   );
 };

@@ -3,16 +3,20 @@ import ReactDOM from 'react-dom';
 
 import './styles.scss';
 import App from './App';
-import SystemTheme  from 'config/SystemTheme';
+import SystemTheme from 'config/SystemTheme';
 import reportWebVitals from './reportWebVitals';
 import './config/i18n';
 import './config/firebase';
+import './utils/yupLocale';
+import { AppProvider } from 'context';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SystemTheme>
-      <App />
-    </SystemTheme>
+    <AppProvider>
+      <SystemTheme>
+        <App />
+      </SystemTheme>
+    </AppProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

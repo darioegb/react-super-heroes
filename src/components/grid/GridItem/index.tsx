@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { IconButton, TableCell, TableRow } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+
 import { Column } from 'interfaces';
+import { ConfirmDialog } from 'components/ConfirmDialog';
+import { useTranslation } from 'react-i18next';
 
 interface GridItemProps<T> {
   row: T;
@@ -17,8 +21,18 @@ export const GridItem = <T extends unknown>({
   onAddOrEditOrView,
   onDelete,
 }: GridItemProps<T>) => {
+  const { t: translate } = useTranslation();
+  const [open, setOpen] = useState(false);
+
+  const handleDelete = () => setOpen(true);
+
+  const handleClose = (isOk: boolean) => {
+    setOpen(false);
+    isOk && onDelete(row);
+  };
+
   return (
-    <TableRow hover role='checkbox' tabIndex={-1}>
+    <TableRow hover role='row' tabIndex={-1}>
       {columns.map((column) => {
         const value = row[column.id];
         return (
@@ -42,8 +56,9 @@ export const GridItem = <T extends unknown>({
           </TableCell>
         );
       })}
-      <TableCell>
+      <TableCell role='cell'>
         <IconButton
+          data-testid='icon-button-visibility'
           aria-label='visibility'
           onClick={() => onAddOrEditOrView(row, true)}
         >
@@ -51,6 +66,7 @@ export const GridItem = <T extends unknown>({
         </IconButton>
         <IconButton
           color='primary'
+          data-testid='icon-button-edit'
           aria-label='edit'
           onClick={() => onAddOrEditOrView(row)}
         >
@@ -58,12 +74,20 @@ export const GridItem = <T extends unknown>({
         </IconButton>
         <IconButton
           color='error'
+          data-testid='icon-button-delete'
           aria-label='delete'
-          onClick={() => onDelete(row)}
+          onClick={handleDelete}
         >
           <DeleteIcon />
         </IconButton>
       </TableCell>
+      <ConfirmDialog
+        open={open}
+        title={translate('globals.dialogs.delete.title', {
+          value: row['name' as keyof T],
+        })}
+        onClose={handleClose}
+      />
     </TableRow>
   );
 };

@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+
 import { SuperHeroContext } from 'modules/super-hero/context';
 
 export const useSuperHero = () => {

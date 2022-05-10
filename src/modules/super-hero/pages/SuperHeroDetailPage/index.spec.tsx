@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { SuperHeroProvider } from 'modules/super-hero/context';
-import { SuperHeroDetailPage } from './SuperHeroDetailPage';
+import { SuperHeroDetailPage } from '.';
 
 describe('SuperHeroDetailPage', () => {
   it('should render SuperHeroDetailPage', () => {

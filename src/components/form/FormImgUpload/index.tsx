@@ -40,7 +40,16 @@ export interface FormImgUploadExpose {
   initUploading: () => void;
 }
 
-export const FormImgUpload = forwardRef<FormImgUploadExpose, FormImgUploadProps>(
+export interface ImgUploadState {
+  isUploading: boolean;
+  previewPicture: string;
+  uploadProgress: number;
+}
+
+export const FormImgUpload = forwardRef<
+  FormImgUploadExpose,
+  FormImgUploadProps
+>(
   (
     {
       name,
@@ -54,47 +63,52 @@ export const FormImgUpload = forwardRef<FormImgUploadExpose, FormImgUploadProps>
   ) => {
     const { t: translate } = useTranslation();
     const { enqueueSnackbar } = useSnackbar();
-    const [uploadProgress, setUploadProgress] = useState(0);
-    const [previewPicture, setPreviewPicture] = useState(
-      seletedItemPicture || '',
-    );
-    const [isUploading, setIsUploading] = useState(false);
+    const [{ isUploading, previewPicture, uploadProgress }, setImgUploadState] =
+      useState<ImgUploadState>({
+        isUploading: false,
+        uploadProgress: 0,
+        previewPicture: seletedItemPicture || '',
+      });
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-      if (isUploading) {
-        setIsUploading(false);
-        const files = inputRef?.current?.files;
-        if (!files) return;
-        const uploadTask = uploadBytesResumable(fileRef(fileName()), files[0]);
-        uploadTask.on(
-          'state_changed',
-          (snapshot) => {
-            setUploadProgress(snapshot.bytesTransferred / snapshot.totalBytes);
-          },
-          () => {
-            enqueueSnackbar(translate('globals.toasts.imageError'), {
-              variant: 'error',
-              anchorOrigin,
-            });
-          },
-          async () => {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            handleSaveOrUpdate(downloadURL);
-          },
-        );
-      }
+      if (!isUploading) return;
+      setImgUploadState((state) => ({ ...state, isUploading: false }));
+      const files = inputRef?.current?.files;
+      if (!files) return;
+      const uploadTask = uploadBytesResumable(fileRef(fileName()), files[0]);
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          setImgUploadState((state) => ({
+            ...state,
+            uploadProgress: snapshot.bytesTransferred / snapshot.totalBytes,
+          }));
+        },
+        () => {
+          enqueueSnackbar(translate('globals.toasts.imageError'), {
+            variant: 'error',
+            anchorOrigin,
+          });
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          handleSaveOrUpdate(downloadURL);
+        },
+      );
     }, [enqueueSnackbar, handleSaveOrUpdate, isUploading, translate]);
 
     useImperativeHandle(ref, () => ({
-      initUploading: () => setIsUploading(true),
+      initUploading: () =>
+        setImgUploadState((state) => ({ ...state, isUploading: true })),
     }));
 
     const handleChange = async ({
       target: { files },
     }: ChangeEvent<HTMLInputElement>) => {
       if (!files) return;
-      setPreviewPicture(await fileToBase64String(files[0]));
+      const previewPicture = await fileToBase64String(files[0]);
+      setImgUploadState((state) => ({ ...state, previewPicture }));
     };
 
     return (

@@ -1,7 +1,7 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
 import { SuperHeroProvider } from 'modules/super-hero/context';
-import { SuperHeroGridPage } from './SuperHeroGridPage';
+import { SuperHeroGridPage } from '.';
 
 const mockFn = jest.fn();
 const initialPageConfig = {

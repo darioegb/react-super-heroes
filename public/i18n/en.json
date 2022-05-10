@@ -13,7 +13,7 @@
       }
     },
     "detail": {
-      "title": "SuperHeroe",
+      "title": "SuperHero",
       "form": {
         "agePlaceholder": "Ex. 50",
         "namePlaceholder": "Ex. Superman",
@@ -21,20 +21,6 @@
         "specialtyPlaceHolder": "Ex. Can fly",
         "heightPlaceholder": "Ex. 1.70m",
         "weightPlaceholder": "Ex. 70kg"
-      }
-    },
-    "toasts": {
-      "create": {
-        "success": "The superheoe was added successfully",
-        "error": "An error occurred while adding a superhero"
-      },
-      "update": {
-        "success": "The superheoe was updated successfully",
-        "error": "An error occurred while updating a superhero"
-      },
-      "remove": {
-        "success": "The superheoe has been successfully removed",
-        "error": "An error occurred while deleting a superhero"
       }
     }
   },
@@ -73,15 +59,34 @@
       "delete": {
         "title": "Are you sure you want to remove {{value}}?"
       }
+    },
+    "locales": {
+      "es": "Spanish",
+      "en": "English"
+    },
+    "toasts": {
+      "create": {
+        "success": "{{value}} was added successfully",
+        "error": "An error occurred while adding a {{value}}"
+      },
+      "update": {
+        "success": "{{value}} was updated successfully",
+        "error": "An error occurred while updating a {{value}}"
+      },
+      "delete": {
+        "success": "{{value}} has been successfully deleted",
+        "error": "An error occurred while deleting a {{value}}"
+      },
+      "imageError": "An error occurred while uploadingImage"
     }
   },
   "validations": {
     "required": "The field is required.",
-    "maxLength": "The maximum length allowed is {{param}}.",
-    "minLength": "The minimum allowed length is {{param}}.",
+    "maxLength": "The maximum length allowed is {{max}}.",
+    "minLength": "The minimum allowed length is {{min}}.",
     "email": "It is not a valid email.",
-    "min": "The minimum allowed is {{param}}.",
-    "max": "The maximum allowed is {{param}}.",
+    "min": "The minimum allowed is {{min}}.",
+    "max": "The maximum allowed is {{max}}.",
     "fileSize": "The file is too large",
     "pattern": {
       "numeric": "The valid format is numeric.",

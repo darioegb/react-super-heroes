@@ -1,6 +1,8 @@
 import { createTheme, ThemeProvider, useMediaQuery } from '@mui/material';
-import { esES } from '@mui/material/locale';
 import { useMemo } from 'react';
+
+import { useApp } from 'hooks';
+import { locales } from 'constant';
 
 interface SystemThemeProps {
   children: JSX.Element;
@@ -8,6 +10,7 @@ interface SystemThemeProps {
 
 const SystemTheme = ({ children }: SystemThemeProps) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const { locale } = useApp();
 
   const theme = useMemo(
     () =>
@@ -17,9 +20,9 @@ const SystemTheme = ({ children }: SystemThemeProps) => {
             mode: prefersDarkMode ? 'dark' : 'light',
           },
         },
-        esES,
+        locales[locale],
       ),
-    [prefersDarkMode],
+    [locale, prefersDarkMode],
   );
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
