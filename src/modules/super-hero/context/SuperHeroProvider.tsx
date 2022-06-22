@@ -106,7 +106,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
 
   const getPage = useCallback(
     async (pageConfig: PageConfig<SuperHero>) => {
-      const { isError, data, count } = await fetch<SuperHero[]>({
+      const result = await fetch<SuperHero[]>({
         instance,
         url: resourceUrl,
         method: 'get',
@@ -114,6 +114,8 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
           params: createHttpParams<SuperHero>(pageConfig),
         },
       });
+      if (!result) return 0;
+      const { isError, data, count } = result;
       const dataLength = data?.length || 100;
       dispatch({
         type: '[SuperHero] get page',

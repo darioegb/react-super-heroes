@@ -1,20 +1,17 @@
 import { Card, CardContent, CardHeader } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { FormCardActions } from 'components';
 
 interface FormCardProps {
   children: JSX.Element;
-  view: boolean;
+  actions: JSX.Element;
+  title: string;
 }
 
-export const FormCard = ({ children, view }: FormCardProps) => {
-  const { t: translate } = useTranslation();
-
+export const FormCard = ({ children, title, actions }: FormCardProps) => {
   return (
     <Card>
-      <CardHeader title={translate('superHeroes.detail.title')} />
+      <CardHeader title={title} />
       <CardContent>{children}</CardContent>
-      <FormCardActions view={view} />
+      {actions}
     </Card>
   );
 };

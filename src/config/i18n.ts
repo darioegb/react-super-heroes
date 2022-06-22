@@ -10,7 +10,7 @@ i18next
     fallbackLng: 'es',
     preload: ['es', 'en'],
     backend: {
-      loadPath: '/i18n/{{lng}}.json'
+      loadPath: '/i18n/{{lng}}.json',
     },
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default

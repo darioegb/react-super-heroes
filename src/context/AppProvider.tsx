@@ -19,7 +19,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     dispatch({
       type: '[App] set theme locale',
       payload: { locale },
-    }); 
+    });
 
   return (
     <AppContext.Provider value={{ appState, setThemeLocale }}>

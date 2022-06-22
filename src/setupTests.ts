@@ -7,11 +7,18 @@ import '@testing-library/jest-dom';
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key: string) => key,
+    i18n: {
+      changeLanguage: jest.fn(),
+    },
   }),
 }));
 
+export const mockSnackBar = jest.fn();
+
 jest.mock('notistack', () => ({
   useSnackbar: () => ({
-    enqueueSnackbar: jest.fn(),
+    enqueueSnackbar: mockSnackBar,
   }),
 }));
+
+export const mockFn = jest.fn();

@@ -32,7 +32,7 @@ export const GridItem = <T extends unknown>({
   };
 
   return (
-    <TableRow hover role='row' tabIndex={-1}>
+    <TableRow hover role="row" tabIndex={-1}>
       {columns.map((column) => {
         const value = row[column.id];
         return (
@@ -46,7 +46,7 @@ export const GridItem = <T extends unknown>({
             ) : (
               <img
                 style={{ maxWidth: '5rem' }}
-                alt='item or alt'
+                alt="item or alt"
                 src={
                   (value as unknown as string) ||
                   `${process.env.PUBLIC_URL}/img/no-image.png`
@@ -56,26 +56,26 @@ export const GridItem = <T extends unknown>({
           </TableCell>
         );
       })}
-      <TableCell role='cell'>
+      <TableCell role="cell">
         <IconButton
-          data-testid='icon-button-visibility'
-          aria-label='visibility'
+          data-testid="icon-button-visibility"
+          aria-label="visibility"
           onClick={() => onAddOrEditOrView(row, true)}
         >
           <VisibilityIcon />
         </IconButton>
         <IconButton
-          color='primary'
-          data-testid='icon-button-edit'
-          aria-label='edit'
+          color="primary"
+          data-testid="icon-button-edit"
+          aria-label="edit"
           onClick={() => onAddOrEditOrView(row)}
         >
           <EditIcon />
         </IconButton>
         <IconButton
-          color='error'
-          data-testid='icon-button-delete'
-          aria-label='delete'
+          color="error"
+          data-testid="icon-button-delete"
+          aria-label="delete"
           onClick={handleDelete}
         >
           <DeleteIcon />

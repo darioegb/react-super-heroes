@@ -28,8 +28,8 @@ export const SuperHeroGrid = ({ count }: SuperHeroGridProps) => {
     setPageConfig,
     onDelete,
   } = useSuperHero();
-  const { rowPerpageTranslate } = useCustomTranslate();
-  const rowsPerPageConfig = rowPerpageTranslate();
+  const { rowPerPageTranslate } = useCustomTranslate();
+  const rowsPerPageConfig = rowPerPageTranslate();
 
   const handleRequestSort = (
     _event: MouseEvent<unknown>,
@@ -54,7 +54,7 @@ export const SuperHeroGrid = ({ count }: SuperHeroGridProps) => {
   return (
     <Paper style={{ width: '100%' }}>
       <TableContainer style={{ maxHeight: '60vh' }}>
-        <Table stickyHeader aria-label='sticky table'>
+        <Table stickyHeader aria-label="sticky table">
           <GridTableHead
             onRequestSort={handleRequestSort}
             order={order}
@@ -68,7 +68,7 @@ export const SuperHeroGrid = ({ count }: SuperHeroGridProps) => {
                 rows={rows}
                 order={order}
                 orderBy={orderBy}
-                renderItem={item => (
+                renderItem={(item) => (
                   <GridItem
                     key={item.name}
                     row={item}
@@ -86,7 +86,7 @@ export const SuperHeroGrid = ({ count }: SuperHeroGridProps) => {
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={rowsPerPageConfig}
-        component='div'
+        component="div"
         count={count}
         rowsPerPage={rowsPerPage}
         page={rows?.length <= 0 ? 0 : page}

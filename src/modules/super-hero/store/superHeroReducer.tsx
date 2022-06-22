@@ -1,7 +1,10 @@
 import { SuperHeroState } from 'modules/super-hero/interfaces/superHero';
 import { SuperHeroAction } from './superHeroAction';
 
-export const superHeroReducer = (state: SuperHeroState, action: SuperHeroAction): SuperHeroState => {
+export const superHeroReducer = (
+  state: SuperHeroState,
+  action: SuperHeroAction,
+): SuperHeroState => {
   switch (action.type) {
     case '[SuperHero] create':
       return {
@@ -13,14 +16,19 @@ export const superHeroReducer = (state: SuperHeroState, action: SuperHeroAction)
       return {
         ...state,
         superHeroes: state.superHeroes.map(({ ...superHero }) =>
-          superHero.id === action.payload.superHero.id ? action.payload.superHero : superHero,
+          superHero.id === action.payload.superHero.id
+            ? action.payload.superHero
+            : superHero,
         ),
       };
 
     case '[SuperHero] delete':
       return {
         ...state,
-        superHeroes: state.superHeroes.filter(({ ...superHero }) => superHero.id && superHero.id !== action.payload.id),
+        superHeroes: state.superHeroes.filter(
+          ({ ...superHero }) =>
+            superHero.id && superHero.id !== action.payload.id,
+        ),
         selectedSuperHero: undefined,
       };
 

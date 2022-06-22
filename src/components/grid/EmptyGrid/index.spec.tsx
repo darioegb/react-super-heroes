@@ -11,7 +11,9 @@ describe('EmptyGrid', () => {
         </tbody>
       </table>,
     );
-    const tableCell = screen.getByText('globals.grid.noMatchingDataText', { selector: 'td' });
+    const tableCell = screen.getByText('globals.grid.noMatchingDataText', {
+      selector: 'td',
+    });
     expect(tableCell).toBeInTheDocument();
   });
 });

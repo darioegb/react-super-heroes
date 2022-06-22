@@ -4,12 +4,22 @@ import { SuperHeroProvider } from 'modules/super-hero/context';
 import { useSuperHero } from './useSuperHero';
 
 describe('useSuperHero', () => {
-  const wrapper = ({ children }: any) => <SuperHeroProvider>{children}</SuperHeroProvider>;
+  const wrapper = ({ children }: any) => (
+    <SuperHeroProvider>{children}</SuperHeroProvider>
+  );
 
-  it('should return false when not exist http request', () => {
+  it('should return hook data', () => {
     const { result } = renderHook(() => useSuperHero(), { wrapper });
-    const { pageConfig, selectedSuperHero, superHeroes, columns, setPageConfig, getPage, onDelete, onAddOrEditOrView } =
-      result.current;
+    const {
+      pageConfig,
+      selectedSuperHero,
+      superHeroes,
+      columns,
+      setPageConfig,
+      getPage,
+      onDelete,
+      onAddOrEditOrView,
+    } = result.current;
     expect(typeof onDelete).toBe('function');
     expect(typeof onAddOrEditOrView).toBe('function');
     expect(typeof setPageConfig).toBe('function');

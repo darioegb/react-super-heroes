@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import { GridTableHead } from '.';
 
@@ -24,23 +24,23 @@ describe('GridTableHead', () => {
           onAddOrEditOrView={onAddOrEditOrView}
         />
       </table>,
-    ).container;
+    );
 
   it('should render GridTableHead', () => {
-    const container = initContainerRender();
-    expect(container.querySelector('tr')?.querySelectorAll('th').length).toBe(3);
+    initContainerRender();
+    expect(screen.getAllByRole('columnheader').length).toBe(3);
   });
 
   it('should fire onRequestSort method when click on any column', () => {
-    const container = initContainerRender();
-    const column = container.querySelectorAll('th')[0].querySelector('span');
+    initContainerRender();
+    const column = screen.getByText('Name');
     column && fireEvent.click(column);
     expect(onRequestSort).toHaveBeenCalled();
   });
 
   it('should fire onAddOrEditOrView method when click on add', () => {
-    const container = initContainerRender();
-    const addButton = container.querySelector('button[aria-label="add"]');
+    initContainerRender();
+    const addButton = screen.getByTestId('add-button');
     addButton && fireEvent.click(addButton);
     expect(onAddOrEditOrView).toHaveBeenCalled();
   });

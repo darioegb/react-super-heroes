@@ -1,5 +1,5 @@
 import { defaultPageConfig, GenreEnum } from 'constant';
-import { SuperHeroState } from '../interfaces/superHero';
+import { SuperHeroState } from 'modules/super-hero/interfaces/superHero';
 import { superHeroReducer } from './superHeroReducer';
 
 const initialState: SuperHeroState = {
@@ -9,7 +9,11 @@ const initialState: SuperHeroState = {
 };
 
 describe('superHeroReducer', () => {
-  const mockSuperHero = { name: 'test', genre: GenreEnum.Male, specialty: 'test superHero' };
+  const mockSuperHero = {
+    name: 'test',
+    genre: GenreEnum.Male,
+    specialty: 'test superHero',
+  };
 
   it('should return default state', () => {
     const state = superHeroReducer(initialState, {} as any);

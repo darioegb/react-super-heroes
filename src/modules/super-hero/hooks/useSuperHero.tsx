@@ -10,7 +10,7 @@ export const useSuperHero = () => {
     onAddOrEditOrView,
     getPage,
     setPageConfig,
-    saveOrUpdate
+    saveOrUpdate,
   } = useContext(SuperHeroContext);
   const {
     pageConfig: { page, rowsPerPage, order, orderBy, filter },
@@ -33,6 +33,6 @@ export const useSuperHero = () => {
     onAddOrEditOrView,
     getPage,
     setPageConfig,
-    saveOrUpdate
+    saveOrUpdate,
   };
 };

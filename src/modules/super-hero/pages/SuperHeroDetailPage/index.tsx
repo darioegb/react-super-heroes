@@ -25,6 +25,7 @@ import {
   TextfieldController,
   FormImgUpload,
   FormImgUploadExpose,
+  FormCardActions,
 } from 'components';
 
 const { text, number, textarea } = defaultFormControlSizes;
@@ -95,12 +96,11 @@ export const SuperHeroDetailPage = () => {
     if (picture?.length) {
       imgUploadRef?.current?.initUploading();
     } else {
-      void handleSaveOrUpdate();
+      handleSaveOrUpdate();
     }
   };
 
   const handleSaveOrUpdate = async (downloadURL?: string) => {
-    if (!superHero) return;
     const opType = selectedSuperHero ? httpMethodKeys.put : httpMethodKeys.post;
     await saveOrUpdate(
       opType,
@@ -115,21 +115,23 @@ export const SuperHeroDetailPage = () => {
 
   const onReset = () => reset();
 
-  const handleReturn = () =>
-    history.length <= 2 ? history.push('/') : history.goBack();
+  const handleReturn = () => history.goBack();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} onReset={onReset}>
-      <FormCard view={view}>
+      <FormCard
+        title={translate('superHeroes.detail.title')}
+        actions={<FormCardActions view={view} />}
+      >
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <TextfieldController
-              name='name'
+              name="name"
               control={control}
               defaultValue={selectedSuperHero?.name}
               label={translate('superHeroes.grid.columns.name')}
               placeholder={translate('superHeroes.detail.form.namePlaceholder')}
-              variant='filled'
+              variant="filled"
               error={errors?.name}
               disabled={view}
               uppercase={true}
@@ -137,20 +139,20 @@ export const SuperHeroDetailPage = () => {
           </Grid>
           <Grid item xs={6}>
             <TextfieldController
-              name='age'
+              name="age"
               control={control}
               defaultValue={selectedSuperHero?.age}
               label={translate('superHeroes.grid.columns.age')}
               placeholder={translate('superHeroes.detail.form.agePlaceholder')}
-              variant='filled'
-              type='number'
+              variant="filled"
+              type="number"
               error={errors?.age}
               disabled={view}
             />
           </Grid>
           <Grid item xs={6}>
             <SelectController
-              name='genre'
+              name="genre"
               control={control}
               defaultValue={selectedSuperHero?.genre}
               defaultSelectLabel={translate('globals.selectDefault')}
@@ -166,14 +168,14 @@ export const SuperHeroDetailPage = () => {
           </Grid>
           <Grid item xs={6}>
             <TextfieldController
-              name='specialty'
+              name="specialty"
               control={control}
               defaultValue={selectedSuperHero?.specialty}
               label={translate('superHeroes.grid.columns.specialty')}
               placeholder={translate(
                 'superHeroes.detail.form.specialtyPlaceHolder',
               )}
-              variant='filled'
+              variant="filled"
               multiline={true}
               rows={4}
               error={errors?.specialty}
@@ -183,37 +185,37 @@ export const SuperHeroDetailPage = () => {
           </Grid>
           <Grid item xs={6}>
             <TextfieldController
-              name='height'
+              name="height"
               control={control}
               defaultValue={selectedSuperHero?.height}
               label={translate('superHeroes.grid.columns.height')}
               placeholder={translate(
                 'superHeroes.detail.form.heightPlaceholder',
               )}
-              variant='filled'
-              type='number'
+              variant="filled"
+              type="number"
               error={errors?.height}
               disabled={view}
             />
           </Grid>
           <Grid item xs={6}>
             <TextfieldController
-              name='weight'
+              name="weight"
               control={control}
               defaultValue={selectedSuperHero?.weight}
               label={translate('superHeroes.grid.columns.weight')}
               placeholder={translate(
                 'superHeroes.detail.form.weightPlaceholder',
               )}
-              variant='filled'
-              type='number'
+              variant="filled"
+              type="number"
               error={errors?.weight}
               disabled={view}
             />
           </Grid>
           <Grid item xs={12}>
             <FormImgUpload
-              name='picture'
+              name="picture"
               register={register}
               seletedItemPicture={selectedSuperHero?.picture}
               error={errors?.picture}

@@ -25,17 +25,23 @@ export const useAxiosLoader = () => {
   }, []); // create the interceptors
 
   useEffect(() => {
-    instances.forEach(instance => {      
+    instances.forEach((instance) => {
       // add request interceptors
-      const reqInterceptor = instance.interceptors.request.use(interceptors.request, interceptors.error);
+      const reqInterceptor = instance.interceptors.request.use(
+        interceptors.request,
+        interceptors.error,
+      );
       // add response interceptors
-      const resInterceptor = instance.interceptors.response.use(interceptors.response, interceptors.error);
+      const resInterceptor = instance.interceptors.response.use(
+        interceptors.response,
+        interceptors.error,
+      );
       return () => {
         // remove all intercepts when done
         instance.interceptors.request.eject(reqInterceptor);
         instance.interceptors.response.eject(resInterceptor);
       };
-    })
+    });
   }, [interceptors]);
 
   return [counter > 0];

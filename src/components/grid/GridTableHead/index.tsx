@@ -51,8 +51,9 @@ export const GridTableHead = <T extends unknown>({
         ))}
         <TableCell>
           <IconButton
-            color='primary'
-            aria-label='add'
+            color="primary"
+            aria-label="add"
+            data-testid="add-button"
             onClick={() => onAddOrEditOrView()}
           >
             <AddIcon />

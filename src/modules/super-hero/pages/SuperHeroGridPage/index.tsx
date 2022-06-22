@@ -9,18 +9,15 @@ import { useSuperHero } from 'modules/super-hero/hooks/useSuperHero';
 export const SuperHeroGridPage = () => {
   const [count, setCount] = useState<number>(0);
   const { t: translate } = useTranslation();
-  const { pageConfig, getPage, setPageConfig } = useSuperHero();
+  const { pageConfig, filter, getPage, setPageConfig } = useSuperHero();
 
   useEffect(() => {
     const fetchData = async () => {
-      const { filter } = pageConfig;
-      if (filter?.length > 2 || filter?.length === 0) {
-        const count = await getPage(pageConfig);
-        setCount(count);
-      }
+      const count = await getPage(pageConfig);
+      setCount(count);
     };
-    fetchData();
-  }, [getPage, pageConfig]);
+    if (filter?.length > 2 || filter?.length === 0) fetchData();
+  }, [filter, getPage, pageConfig]);
 
   const handleChange = ({
     target: { value },
@@ -31,7 +28,7 @@ export const SuperHeroGridPage = () => {
   return (
     <Paper>
       <Toolbar>
-        <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           {translate('superHeroes.title')}
         </Typography>
         <FilterGrid handleChange={handleChange} />

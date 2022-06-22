@@ -21,18 +21,18 @@ export const FormCardActions = ({ view }: FormCardActionsProps) => {
 
   return (
     <CardActions>
-      <Button variant='contained' color='secondary' onClick={goBack}>
+      <Button variant="contained" color="secondary" onClick={goBack}>
         {translate('globals.buttons.cancel')}
       </Button>
       <Button
-        variant='contained'
-        color='inherit'
-        type='reset'
+        variant="contained"
+        color="inherit"
+        type="reset"
         disabled={isviewOrEdit}
       >
         {translate('globals.buttons.reset')}
       </Button>
-      <Button variant='contained' color='primary' type='submit' disabled={view}>
+      <Button variant="contained" color="primary" type="submit" disabled={view}>
         {translate('globals.buttons.save')}
       </Button>
     </CardActions>

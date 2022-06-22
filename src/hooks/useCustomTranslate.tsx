@@ -11,7 +11,7 @@ export const useCustomTranslate = () => {
     value: number,
     object: T,
   ): string => translate(`${path}.${object[value]?.toLowerCase()}`);
-  const rowPerpageTranslate = () => [
+  const rowPerPageTranslate = () => [
     ...rowsPerPageConfig,
     { value: -1, label: translate('globals.paginationAllOption') },
   ];
@@ -29,7 +29,7 @@ export const useCustomTranslate = () => {
   };
   return {
     dropdownTranslate,
-    rowPerpageTranslate,
+    rowPerPageTranslate,
     errorMessageTranslate,
   };
 };

@@ -99,7 +99,7 @@ export const FormImgUpload = forwardRef<
     }, [enqueueSnackbar, handleSaveOrUpdate, isUploading, translate]);
 
     useImperativeHandle(ref, () => ({
-      initUploading: () =>
+      initUploading: () => 
         setImgUploadState((state) => ({ ...state, isUploading: true })),
     }));
 
@@ -114,15 +114,16 @@ export const FormImgUpload = forwardRef<
     return (
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <FormControl variant='filled' fullWidth disabled={view}>
+          <FormControl variant="filled" fullWidth disabled={view}>
             <FilledInput
               {...register(name)}
-              type='file'
+              data-testid="input-image-file"
+              type="file"
               inputProps={{
                 accept: 'image/*',
               }}
               startAdornment={
-                <InputAdornment position='start'>
+                <InputAdornment position="start">
                   <AttachFileIcon />
                 </InputAdornment>
               }
@@ -133,7 +134,11 @@ export const FormImgUpload = forwardRef<
           </FormControl>
           {!!error && <FormHelperText error>{error?.message}</FormHelperText>}
           {uploadProgress > 0 && uploadProgress < 100 && (
-            <LinearProgress variant='determinate' value={uploadProgress} />
+            <LinearProgress
+              data-testid="upload-progress"
+              variant="determinate"
+              value={uploadProgress}
+            />
           )}
         </Grid>
         <Grid item xs={6}>
@@ -145,7 +150,7 @@ export const FormImgUpload = forwardRef<
                 alignItems: 'center',
               }}
             >
-              <Typography gutterBottom variant='h5' component='div'>
+              <Typography gutterBottom variant="h5" component="div">
                 {translate('globals.detail.previewCardTitle')}
               </Typography>
               <CardMedia
@@ -154,11 +159,11 @@ export const FormImgUpload = forwardRef<
                   objectFit: 'scale-down',
                   objectPosition: '50% 50%',
                 }}
-                component='img'
+                component="img"
                 image={
                   previewPicture || `${process.env.PUBLIC_URL}/img/no-image.png`
                 }
-                alt='no image'
+                alt="no image"
               />
             </CardContent>
           </Card>

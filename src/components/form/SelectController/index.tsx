@@ -1,4 +1,10 @@
-import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mui/material';
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText,
+} from '@mui/material';
 import { Control, FieldValues, Controller } from 'react-hook-form';
 
 import { Option } from 'interfaces';
@@ -37,7 +43,7 @@ export const SelectController = ({
       control={control}
       defaultValue={defaultValue || ''}
       render={({ field }) => (
-        <FormControl variant="filled" fullWidth error={!!error}>
+        <FormControl variant="filled" fullWidth error={!!error} data-testid="select-control">
           <InputLabel>{label}</InputLabel>
           <Select {...field} placeholder={placeholder} disabled={disabled}>
             <MenuItem value="" disabled>

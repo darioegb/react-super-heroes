@@ -64,7 +64,9 @@ describe('GridItem', () => {
     initRender();
     const deleteButton = screen.getByTestId('icon-button-delete');
     fireEvent.click(deleteButton);
-    expect(screen.getByText('globals.dialogs.delete.title')).toBeInTheDocument();
+    expect(
+      screen.getByText('globals.dialogs.delete.title'),
+    ).toBeInTheDocument();
     const confirmButton = screen.getByText('globals.buttons.confirm');
     fireEvent.click(confirmButton);
     expect(onDelete).toHaveBeenCalledWith(mockRow);

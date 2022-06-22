@@ -11,8 +11,8 @@ export const FilterGrid = ({ handleChange }: FilterGridProps) => {
 
   return (
     <TextField
-      margin='normal'
-      type='search'
+      margin="normal"
+      type="search"
       label={translate('globals.grid.filterInput.label')}
       placeholder={translate('globals.grid.filterInput.placeholder')}
       onChange={handleChange}

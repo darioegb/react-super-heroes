@@ -23,15 +23,16 @@ export const Navbar = () => {
   };
 
   return (
-    <AppBar position='static'>
+    <AppBar position="static">
       <Toolbar
-        variant='dense'
+        variant="dense"
         sx={{ display: 'flex', justifyContent: 'space-between' }}
       >
-        <Typography variant='h6' color='inherit' component='div'>
+        <Typography variant="h6" color="inherit" component="div">
           <Title />
         </Typography>
         <Select
+          data-testid="select-locale"
           value={locale}
           onChange={handleChange}
           sx={{

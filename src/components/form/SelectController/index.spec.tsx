@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -17,7 +17,10 @@ describe('SelectController', () => {
     const tests = convertEnumToKeyValueArray(TestEnum);
     const schema = yup
       .object({
-        test: yup.mixed().oneOf(Object.values(TestEnum), 'Error').required('Error'),
+        test: yup
+          .mixed()
+          .oneOf(Object.values(TestEnum), 'Error')
+          .required('Error'),
       })
       .required();
     const {
@@ -58,6 +61,6 @@ describe('SelectController', () => {
     render(<SelectControllerHost />);
     const submit = screen.getByText('SUBMIT');
     submit && fireEvent.click(submit);
-    await waitFor(() => expect(screen.getByText('Error')).toBeInTheDocument());
+    await screen.findByText('Error');
   });
 });

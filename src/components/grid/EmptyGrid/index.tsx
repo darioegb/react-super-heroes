@@ -10,7 +10,9 @@ export const EmptyGrid = ({ value }: EmptyGridProps) => {
 
   return (
     <TableRow tabIndex={-1} key={1}>
-      <TableCell>{translate('globals.grid.noMatchingDataText', { value })}</TableCell>
+      <TableCell>
+        {translate('globals.grid.noMatchingDataText', { value })}
+      </TableCell>
     </TableRow>
   );
 };

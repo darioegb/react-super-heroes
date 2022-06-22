@@ -46,4 +46,3 @@ export const defaultFormControlSizes = {
 };
 
 export const locales = { esES, enUS };
-

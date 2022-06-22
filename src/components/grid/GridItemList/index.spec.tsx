@@ -6,7 +6,7 @@ import { SuperHeroProvider } from 'modules/super-hero/context';
 import { useSuperHero } from 'modules/super-hero/hooks/useSuperHero';
 
 const mockFn = jest.fn();
-jest.mock('../../../modules/super-hero/hooks/useSuperHero', () => ({
+jest.mock('modules/super-hero/hooks/useSuperHero', () => ({
   useSuperHero: () => ({
     rowsPerPage: 5,
     orderBy: 'id',
