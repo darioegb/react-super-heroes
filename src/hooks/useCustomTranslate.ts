@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { rowsPerPageConfig } from 'constant';
+import { ROWS_PER_PAGE_CONFIG } from 'constant';
 import { ErrorMessage } from 'interfaces';
 import { isErrorMessage } from 'utils';
 
@@ -12,7 +12,7 @@ export const useCustomTranslate = () => {
     object: T,
   ): string => translate(`${path}.${object[value]?.toLowerCase()}`);
   const rowPerPageTranslate = () => [
-    ...rowsPerPageConfig,
+    ...ROWS_PER_PAGE_CONFIG,
     { value: -1, label: translate('globals.paginationAllOption') },
   ];
   const errorMessageTranslate = (

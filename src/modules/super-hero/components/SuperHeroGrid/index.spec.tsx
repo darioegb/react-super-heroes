@@ -5,7 +5,7 @@ import {
   SuperHeroContext,
   SuperHeroProvider,
 } from 'modules/super-hero/context';
-import { defaultPageConfig, GenreEnum } from 'constant';
+import { DEFAULT_PAGE_CONFIG, GenreEnum } from 'constant';
 import {
   SuperHero,
   SuperHeroState,
@@ -58,7 +58,7 @@ describe('SuperHeroGrid', () => {
         },
       ],
       selectedSuperHero: undefined,
-      pageConfig: defaultPageConfig,
+      pageConfig: DEFAULT_PAGE_CONFIG,
     };
     const columns: Column<SuperHero>[] = [
       { id: 'name', label: 'Name' },

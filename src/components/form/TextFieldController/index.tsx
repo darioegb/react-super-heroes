@@ -12,7 +12,7 @@ interface TextfieldControllerProps {
   label: string;
   placeholder?: string;
   variant?: 'filled' | 'outlined' | 'standard';
-  error?: Record<string, string>;
+  error?: Record<string, unknown>;
   disabled?: boolean;
   type?: HTMLInputTypeAttribute;
   multiline?: boolean;
@@ -55,7 +55,7 @@ export const TextfieldController = ({
           helperText={
             characterLimit && !error
               ? `${field.value.length}/${characterLimit}`
-              : errorMessageTranslate(error?.message)
+              : errorMessageTranslate(error?.message as string)
           }
           multiline={multiline}
           rows={rows}

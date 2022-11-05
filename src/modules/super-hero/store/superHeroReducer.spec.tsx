@@ -1,11 +1,11 @@
-import { defaultPageConfig, GenreEnum } from 'constant';
+import { DEFAULT_PAGE_CONFIG, GenreEnum } from 'constant';
 import { SuperHeroState } from 'modules/super-hero/interfaces/superHero';
 import { superHeroReducer } from './superHeroReducer';
 
 const initialState: SuperHeroState = {
   superHeroes: [],
   selectedSuperHero: undefined,
-  pageConfig: defaultPageConfig,
+  pageConfig: DEFAULT_PAGE_CONFIG,
 };
 
 describe('superHeroReducer', () => {

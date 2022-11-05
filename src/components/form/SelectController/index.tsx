@@ -19,7 +19,7 @@ interface SelectControllerProps {
   options: Option[];
   optionLabels: { path: string; type: { [key: number]: string } };
   placeholder?: string;
-  error?: Record<string, string>;
+  error?: Record<string, unknown>;
   disabled?: boolean;
 }
 

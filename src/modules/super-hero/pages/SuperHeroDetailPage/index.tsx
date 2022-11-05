@@ -10,9 +10,9 @@ import { Option } from 'interfaces';
 import { convertEnumToKeyValueArray } from 'utils';
 import {
   GenreEnum,
-  httpMethodKeys,
-  regExp,
-  defaultFormControlSizes,
+  HTTP_METHOD_KEYS,
+  REG_EXP,
+  DEFAULT_FORM_CONTROL_SIZES,
 } from 'constant';
 import {
   SuperHero,
@@ -28,7 +28,7 @@ import {
   FormCardActions,
 } from 'components';
 
-const { text, number, textarea } = defaultFormControlSizes;
+const { text, number, textarea } = DEFAULT_FORM_CONTROL_SIZES;
 
 export const SuperHeroDetailPage = () => {
   const { t: translate } = useTranslation();
@@ -41,7 +41,7 @@ export const SuperHeroDetailPage = () => {
       yup.object().shape({
         name: yup
           .string()
-          .matches(regExp.alphabet)
+          .matches(REG_EXP.alphabet)
           .min(text.min)
           .max(text.max)
           .required(),
@@ -101,7 +101,7 @@ export const SuperHeroDetailPage = () => {
   };
 
   const handleSaveOrUpdate = async (downloadURL?: string) => {
-    const opType = selectedSuperHero ? httpMethodKeys.put : httpMethodKeys.post;
+    const opType = selectedSuperHero ? HTTP_METHOD_KEYS.put : HTTP_METHOD_KEYS.post;
     await saveOrUpdate(
       opType,
       {

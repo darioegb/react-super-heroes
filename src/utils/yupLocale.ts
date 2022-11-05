@@ -1,5 +1,5 @@
 import { setLocale } from 'yup';
-import { regExp } from 'constant';
+import { REG_EXP } from 'constant';
 
 setLocale({
   mixed: {
@@ -9,7 +9,7 @@ setLocale({
   },
   string: {
     matches: {
-      [regExp.alphabet as unknown as string]: {
+      [REG_EXP.alphabet as unknown as string]: {
         key: 'validations.pattern.alphabet',
       },
     },

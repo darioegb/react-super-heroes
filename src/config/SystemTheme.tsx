@@ -2,7 +2,7 @@ import { createTheme, ThemeProvider, useMediaQuery } from '@mui/material';
 import { useMemo } from 'react';
 
 import { useApp } from 'hooks';
-import { locales } from 'constant';
+import { LOCALES } from 'constant';
 
 interface SystemThemeProps {
   children: JSX.Element;
@@ -20,7 +20,7 @@ const SystemTheme = ({ children }: SystemThemeProps) => {
             mode: prefersDarkMode ? 'dark' : 'light',
           },
         },
-        locales[locale],
+        LOCALES[locale],
       ),
     [locale, prefersDarkMode],
   );

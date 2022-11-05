@@ -33,6 +33,15 @@ th {
   }
 }
 
+.icon {
+  &-right {
+    margin-left: 1rem;
+  }
+  &-left {
+    margin-right: 1rem;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     color: #ddd;

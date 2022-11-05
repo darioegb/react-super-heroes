@@ -12,7 +12,7 @@ describe('Navbar', () => {
     render(<AppProvider children={<Navbar />} />);
     const select = screen.getByTestId('select-locale')
       .childNodes[1] as HTMLInputElement;
-    fireEvent.change(select, { target: { value: 'enUS' } });
-    expect(select.value).toBe('enUS');
+    fireEvent.change(select, { target: { value: 'esES' } });
+    expect(select.value).toBe('esES');
   });
 });

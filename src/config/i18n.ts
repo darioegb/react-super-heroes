@@ -6,8 +6,8 @@ i18next
   .use(Backend)
   .use(initReactI18next)
   .init({
-    lng: 'es',
-    fallbackLng: 'es',
+    lng: localStorage.getItem('lang') || 'en',
+    fallbackLng: 'en',
     preload: ['es', 'en'],
     backend: {
       loadPath: '/i18n/{{lng}}.json',

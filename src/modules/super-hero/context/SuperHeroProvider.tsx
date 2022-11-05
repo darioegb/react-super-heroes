@@ -4,10 +4,10 @@ import { useHistory } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
 import {
-  anchorOrigin,
-  defaultPageConfig,
+  ANCHOR_ORIGIN,
+  DEFAULT_PAGE_CONFIG,
   GenreEnum,
-  httpMethodKeys,
+  HTTP_METHOD_KEYS,
 } from 'constant';
 import { Column, PageConfig } from 'interfaces';
 import {
@@ -35,7 +35,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
   const initialState: SuperHeroState = {
     superHeroes: [],
     selectedSuperHero: undefined,
-    pageConfig: defaultPageConfig,
+    pageConfig: DEFAULT_PAGE_CONFIG,
   };
   const columns: Column<SuperHero>[] = [
     { id: 'name', label: translate('superHeroes.grid.columns.name') },
@@ -89,7 +89,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
         }),
         {
           variant: 'error',
-          anchorOrigin,
+          anchorOrigin: ANCHOR_ORIGIN,
         },
       );
       return;
@@ -99,7 +99,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
       translate('globals.toasts.delete.success', { value: toastParam }),
       {
         variant: 'success',
-        anchorOrigin,
+        anchorOrigin: ANCHOR_ORIGIN,
       },
     );
   };
@@ -139,7 +139,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
     selectedSuperHero?: SuperHero,
   ) => {
     const { isError, data } =
-      opType === httpMethodKeys.put
+      opType === HTTP_METHOD_KEYS.put
         ? await fetch<SuperHero>({
             instance,
             url: `${resourceUrl}/${selectedSuperHero?.id}`,
@@ -160,7 +160,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
         }),
         {
           variant: 'error',
-          anchorOrigin,
+          anchorOrigin: ANCHOR_ORIGIN,
         },
       );
       return;
@@ -168,7 +168,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
 
     dispatch({
       type:
-        opType === httpMethodKeys.put
+        opType === HTTP_METHOD_KEYS.put
           ? '[SuperHero] update'
           : '[SuperHero] create',
       payload: { superHero: data },
@@ -177,7 +177,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
       translate(`globals.toasts.${opType}.success`, { value: toastParam }),
       {
         variant: 'success',
-        anchorOrigin,
+        anchorOrigin: ANCHOR_ORIGIN,
       },
     );
   };

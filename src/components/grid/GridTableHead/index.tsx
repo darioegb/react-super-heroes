@@ -38,7 +38,7 @@ export const GridTableHead = <T extends unknown>({
           <TableCell
             key={column.id}
             align={column.align}
-            style={{ minWidth: column.minWidth }}
+            sx={{ minWidth: column.minWidth }}
           >
             <TableSortLabel
               active={orderBy === column.id}

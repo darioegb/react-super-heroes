@@ -4,6 +4,7 @@ import { AppState } from 'interfaces';
 import { appReducer } from 'store';
 import { AppContext } from './AppContext';
 import { SupportedLocales } from 'types';
+import { LOCALES } from 'constant';
 
 interface AppProviderProps {
   children: JSX.Element;
@@ -11,7 +12,10 @@ interface AppProviderProps {
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   const initialState: AppState = {
-    locale: 'esES',
+    locale:
+      (Object.keys(LOCALES).find((key: string) =>
+        key.startsWith(localStorage.getItem('lang') as string),
+      ) as SupportedLocales) || 'enUS',
   };
   const [appState, dispatch] = useReducer(appReducer, initialState);
 

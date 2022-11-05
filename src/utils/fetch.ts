@@ -10,7 +10,11 @@ export const fetch = <T>({
   config,
 }: FetchConfig<T>): Promise<FetchResponse<T>> => {
   return ['post', 'put', 'patch'].includes(method)
-    ? instance[method](url, requestData, config as AxiosRequestConfig<T>)
+    ? instance[method](
+        url,
+        requestData as T & AxiosRequestConfig<T>,
+        config as AxiosRequestConfig<T>,
+      )
     : instance[method](url, config as unknown as T & AxiosRequestConfig<T>)
         .then((response) => ({
           isError: false,

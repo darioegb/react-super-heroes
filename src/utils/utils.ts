@@ -1,5 +1,5 @@
 import { firebaseStorage } from 'config/firebase';
-import { pictureBasePath } from 'constant';
+import { PICTURE_BASE_PATH } from 'constant';
 import { ref, StorageReference } from 'firebase/storage';
 import { Option, PageConfig } from 'interfaces';
 import { Order } from 'types';
@@ -8,7 +8,7 @@ import { Order } from 'types';
  * Get enum keys from enum object
  * @param type enum
  */
-export const getEnumKeys = <T>(type: T): string[] =>
+export const getEnumKeys = <T extends {}>(type: T): string[] =>
   Object.keys(type).filter((key) => !Number(key));
 
 /**
@@ -16,7 +16,7 @@ export const getEnumKeys = <T>(type: T): string[] =>
  * @param type enum
  * @example [ { key: 'A', value: 1 }, { key: 'B', value: 2 } ]
  */
-export const convertEnumToKeyValueArray = <T extends unknown>(
+export const convertEnumToKeyValueArray = <T extends {}>(
   type: T,
 ): Option[] =>
   getEnumKeys(type).map(
@@ -63,7 +63,7 @@ export const fileToBase64String = (file: File): Promise<string> => {
 };
 
 export const fileRef = (fileName: string): StorageReference =>
-  ref(firebaseStorage, `${pictureBasePath}/${fileName}`);
+  ref(firebaseStorage, `${PICTURE_BASE_PATH}/${fileName}`);
 
 export const fileName = (): string => `picture-${Date.now()}`;
 

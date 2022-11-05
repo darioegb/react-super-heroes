@@ -25,14 +25,14 @@ import { uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { useSnackbar } from 'notistack';
 
 import { fileName, fileRef, fileToBase64String } from 'utils';
-import { anchorOrigin } from 'constant';
+import { ANCHOR_ORIGIN } from 'constant';
 
 interface FormImgUploadProps {
   name: string;
   register: UseFormRegister<FieldValues>;
   handleSaveOrUpdate: (downloadURL?: string) => Promise<void>;
   seletedItemPicture?: string;
-  error?: Record<string, string>;
+  error?: Record<string, unknown>;
   view?: boolean;
 }
 
@@ -88,7 +88,7 @@ export const FormImgUpload = forwardRef<
         () => {
           enqueueSnackbar(translate('globals.toasts.imageError'), {
             variant: 'error',
-            anchorOrigin,
+            anchorOrigin: ANCHOR_ORIGIN,
           });
         },
         async () => {

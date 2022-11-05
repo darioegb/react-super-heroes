@@ -3,30 +3,30 @@ import { esES, enUS } from '@mui/material/locale';
 
 import { PageConfig } from 'interfaces';
 
-export const idKey = 'id';
-export const httpMethodKeys = {
+export const ID_KEY = 'id';
+export const HTTP_METHOD_KEYS = {
   get: 'get',
   delete: 'delete',
   post: 'create',
   put: 'update',
 };
-export const rowsPerPageConfig = [5, 10, 15, 20, 30, 50, 100];
-export const defaultPageConfig: PageConfig<unknown> = {
+export const ROWS_PER_PAGE_CONFIG = [5, 10, 15, 20, 30, 50, 100];
+export const DEFAULT_PAGE_CONFIG: PageConfig<unknown> = {
   page: 0,
   rowsPerPage: 5,
   orderBy: 'id',
   order: 'asc',
   filter: '',
 };
-export const regExp = {
+export const REG_EXP = {
   alphabet: /^[A-Za-z ]*$/,
 };
-export const anchorOrigin: SnackbarOrigin = {
+export const ANCHOR_ORIGIN: SnackbarOrigin = {
   horizontal: 'right',
   vertical: 'top',
 };
-export const pictureBasePath = 'pictures';
-export const defaultFormControlSizes = {
+export const PICTURE_BASE_PATH = 'pictures';
+export const DEFAULT_FORM_CONTROL_SIZES = {
   text: {
     min: 3,
     max: 60,
@@ -45,4 +45,4 @@ export const defaultFormControlSizes = {
   },
 };
 
-export const locales = { esES, enUS };
+export const LOCALES = { esES, enUS };
