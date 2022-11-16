@@ -9,12 +9,14 @@ import { GridTableHead, EmptyGrid, GridItemList, GridItem } from 'components';
 import { useSuperHero } from 'modules/super-hero/hooks/useSuperHero';
 import { SuperHero } from 'modules/super-hero/interfaces/superHero';
 import { useCustomTranslate } from 'hooks';
+import { useTranslation } from 'react-i18next';
 
 interface SuperHeroGridProps {
   count: number;
 }
 
 export const SuperHeroGrid = ({ count }: SuperHeroGridProps) => {
+  const { t: translate } = useTranslation();
   const {
     columns,
     page,
@@ -60,7 +62,7 @@ export const SuperHeroGrid = ({ count }: SuperHeroGridProps) => {
             order={order}
             orderBy={orderBy}
             columns={columns}
-            onAddOrEditOrView={onAddOrEditOrView}
+            onAdd={onAddOrEditOrView}
           />
           <TableBody>
             {rows?.length ? (
@@ -73,13 +75,24 @@ export const SuperHeroGrid = ({ count }: SuperHeroGridProps) => {
                     key={item.name}
                     row={item}
                     columns={columns}
-                    onAddOrEditOrView={onAddOrEditOrView}
+                    onView={onAddOrEditOrView}
+                    onEdit={onAddOrEditOrView}
                     onDelete={onDelete}
+                    confirmDialogConfig={{
+                      title: translate('globals.dialogs.delete.title', {
+                        value: item.name,
+                      }),
+                      cancelButtonText: translate('globals.buttons.cancel'),
+                      confirmButtonText: translate('globals.buttons.confirm'),
+                    }}
                   />
                 )}
               />
             ) : (
-              <EmptyGrid value={filter} />
+              <EmptyGrid
+                message={translate('globals.grid.noMatchingDataText')}
+                value={filter}
+              />
             )}
           </TableBody>
         </Table>

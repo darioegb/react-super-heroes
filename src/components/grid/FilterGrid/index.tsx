@@ -1,21 +1,36 @@
 import { ChangeEvent } from 'react';
 import { TextField } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 interface FilterGridProps {
-  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  /**
+   * Label for textfield
+   */
+  label: string;
+  /**
+   * Placeholder for textfield
+   */
+  placeholder?: string;
+  /**
+   * Fired when change texfield
+   */
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const FilterGrid = ({ handleChange }: FilterGridProps) => {
-  const { t: translate } = useTranslation();
-
+/**
+ * FilterGrid is an input search using mui.
+ */
+export const FilterGrid = ({
+  label,
+  placeholder = '',
+  ...others
+}: FilterGridProps) => {
   return (
     <TextField
       margin="normal"
       type="search"
-      label={translate('globals.grid.filterInput.label')}
-      placeholder={translate('globals.grid.filterInput.placeholder')}
-      onChange={handleChange}
+      label={label}
+      placeholder={placeholder}
+      {...others}
     />
   );
 };

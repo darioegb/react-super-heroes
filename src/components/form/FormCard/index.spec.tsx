@@ -12,7 +12,7 @@ describe('FormCard', () => {
     const { container } = render(
       <FormCard
         children={<div>{content}</div>}
-        actions={<FormCardActions view={false} />}
+        actions={<FormCardActions isEditOrView={false} view={false} />}
         title={title}
       />,
       { wrapper: MemoryRouter },

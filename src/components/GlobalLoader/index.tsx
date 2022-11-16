@@ -1,14 +1,20 @@
 import { CircularProgress, Stack } from '@mui/material';
-import { useAxiosLoader } from 'hooks';
+interface GlobalLoaderProps {
+  /**
+   * Flag to display loader
+   */
+  loading: boolean;
+}
 
-export const GlobalLoader = () => {
-  const [loading] = useAxiosLoader();
-
+/**
+ * GlobalLoader is a global loader component using mui.
+ */
+export const GlobalLoader = ({ loading }: GlobalLoaderProps) => {
   return (
     <>
       {loading && (
         <Stack alignItems="center">
-          <CircularProgress data-testid="global-loader" />
+          <CircularProgress data-testid="global-loader" sx={{ margin: '.5rem' }} />
         </Stack>
       )}
     </>

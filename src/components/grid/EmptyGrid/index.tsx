@@ -1,18 +1,23 @@
 import { TableCell, TableRow } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 interface EmptyGridProps {
+  /**
+   * Message to display
+   */
+  message: string;
+  /**
+   * Input filter value
+   */
   value: string;
 }
 
-export const EmptyGrid = ({ value }: EmptyGridProps) => {
-  const { t: translate } = useTranslation();
-
+/**
+ * EmptyGrid is text with empty grid message using mui.
+ */
+export const EmptyGrid = ({ message, value }: EmptyGridProps) => {
   return (
-    <TableRow tabIndex={-1} key={1}>
-      <TableCell>
-        {translate('globals.grid.noMatchingDataText', { value })}
-      </TableCell>
+    <TableRow tabIndex={-1} key={1} data-testid="empty-grid-row">
+      <TableCell>{`${message} ${value}`}</TableCell>
     </TableRow>
   );
 };

@@ -5,7 +5,6 @@ export * from './grid/FilterGrid';
 export * from './grid/GridItem';
 export * from './grid/GridItemList';
 export * from './grid/GridTableHead';
-export * from './Title';
 export * from './form/TextFieldController';
 export * from './form/SelectController';
 export * from './form/FormCard';

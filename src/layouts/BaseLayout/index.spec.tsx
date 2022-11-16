@@ -5,7 +5,9 @@ import { AppProvider } from 'context';
 
 describe('BaseLayout', () => {
   it('should render', () => {
-    const { container } = render(<AppProvider children={<BaseLayout />} />);
+    const { container } = render(
+      <AppProvider children={<BaseLayout children={<span>test</span>} />} />,
+    );
     expect(container).toBeInTheDocument();
   });
 });

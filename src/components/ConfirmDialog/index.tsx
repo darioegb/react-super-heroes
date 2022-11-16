@@ -1,24 +1,54 @@
-import { Dialog, DialogTitle, DialogActions, Button } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import {
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  Button,
+} from '@mui/material';
 
-interface ConfirmDialogProps {
+import { ConfirmDialogConfig } from 'interfaces';
+
+interface ConfirmDialogProps extends ConfirmDialogConfig {
+  /**
+   * Flag to open modal
+   */
   open: boolean;
-  title: string;
+  /**
+   * Optional body text
+   */
+  text?: string;
+  /**
+   * Fired when click cancel or confirm buttons
+   */
   onClose: (isOk: boolean) => void;
 }
 
-export const ConfirmDialog = ({ open, title, onClose }: ConfirmDialogProps) => {
-  const { t: translate } = useTranslation();
-
+/**
+ * ConfirmDialog is a confirmation modal using mui.
+ */
+export const ConfirmDialog = ({
+  open,
+  title,
+  text,
+  cancelButtonText = 'Cancel',
+  confirmButtonText = 'Confirm',
+  onClose,
+}: ConfirmDialogProps) => {
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onClose={onClose}>
       <DialogTitle>{title}</DialogTitle>
+      {text && (
+        <DialogContent>
+          <DialogContentText>{text}</DialogContentText>
+        </DialogContent>
+      )}
       <DialogActions>
         <Button autoFocus onClick={() => onClose(false)}>
-          {translate('globals.buttons.cancel')}
+          {cancelButtonText}
         </Button>
-        <Button onClick={() => onClose(true)}>
-          {translate('globals.buttons.confirm')}
+        <Button onClick={() => onClose(true)} autoFocus>
+          {confirmButtonText}
         </Button>
       </DialogActions>
     </Dialog>

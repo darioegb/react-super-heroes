@@ -37,7 +37,7 @@
         "label": "Filter data",
         "placeholder": "Ex. test"
       },
-      "noMatchingDataText": "No data matching the filter {{value}}"
+      "noMatchingDataText": "No data matching the filter"
     },
     "detail": {
       "previewCardTitle": "Preview",

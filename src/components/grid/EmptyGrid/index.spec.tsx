@@ -4,14 +4,15 @@ import { EmptyGrid } from '.';
 
 describe('EmptyGrid', () => {
   it('should render EmptyGrid', () => {
+    const message = 'No matching data';
     render(
       <table>
         <tbody>
-          <EmptyGrid value="" />
+          <EmptyGrid message={message} value='' />
         </tbody>
       </table>,
     );
-    const tableCell = screen.getByText('globals.grid.noMatchingDataText', {
+    const tableCell = screen.getByText(message, {
       selector: 'td',
     });
     expect(tableCell).toBeInTheDocument();

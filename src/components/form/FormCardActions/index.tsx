@@ -1,39 +1,62 @@
-import { useEffect, useState } from 'react';
 import { CardActions, Button } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 interface FormCardActionsProps {
+  /**
+   * Flag to disabled reset button. Is true when card is on edit or view mode
+   */
+   isEditOrView: boolean;
+  /**
+   * Flag to disabled submit button. Is true if card is on view mode
+   */
   view: boolean;
+  /**
+   * Optional cancel button text. By default is Cancel
+   */
+  cancelButtonText?: string;
+  /**
+   * Optional reset button text. By default is Reset
+   */
+  resetButtonText?: string;
+  /**
+   * Optional save button text. By default is Save
+   */
+  saveButtonText?: string;
 }
-
-export const FormCardActions = ({ view }: FormCardActionsProps) => {
-  const { t: translate } = useTranslation();
-  const { id } = useParams<{ id: string }>();
+/**
+ * FormCardActions is a form card actions using mui that contain form actions buttons.
+ */
+export const FormCardActions = ({
+  isEditOrView,
+  view,
+  cancelButtonText = 'Cancel',
+  resetButtonText = 'Reset',
+  saveButtonText = 'Save',
+}: FormCardActionsProps) => {
   const history = useHistory();
-  const [isviewOrEdit, setIsviewOrEdit] = useState(false);
-
-  useEffect(() => {
-    setIsviewOrEdit(!!id);
-  }, [id]);
 
   const goBack = () => history.goBack();
 
   return (
     <CardActions>
-      <Button variant="contained" color="secondary" onClick={goBack}>
-        {translate('globals.buttons.cancel')}
+      <Button
+        type="button"
+        variant="contained"
+        color="secondary"
+        onClick={goBack}
+      >
+        {cancelButtonText}
       </Button>
       <Button
         variant="contained"
         color="inherit"
         type="reset"
-        disabled={isviewOrEdit}
+        disabled={isEditOrView}
       >
-        {translate('globals.buttons.reset')}
+        {resetButtonText}
       </Button>
       <Button variant="contained" color="primary" type="submit" disabled={view}>
-        {translate('globals.buttons.save')}
+        {saveButtonText}
       </Button>
     </CardActions>
   );
