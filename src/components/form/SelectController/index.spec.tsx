@@ -42,7 +42,6 @@ describe('SelectController', () => {
           label="Test"
           placeholder="Test"
           options={tests}
-          optionLabels={{ path: 'globals.enums.test', type: TestEnum }}
           error={errors?.test}
           disabled={false}
         />

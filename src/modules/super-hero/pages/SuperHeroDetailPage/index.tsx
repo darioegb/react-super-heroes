@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef } from 'react';
 import { Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -87,6 +87,7 @@ export const SuperHeroDetailPage = () => {
     resolver: yupResolver(schema),
   });
   const view = (history.location.state as { view: boolean })?.view;
+  const { id } = useParams<{ id: string }>();
   const genres: Option[] = convertEnumToKeyValueArray(GenreEnum);
 
   const onSubmit = async (value: unknown) => {
@@ -96,12 +97,14 @@ export const SuperHeroDetailPage = () => {
     if (picture?.length) {
       imgUploadRef?.current?.initUploading();
     } else {
-      handleSaveOrUpdate();
+      handleSave();
     }
   };
 
-  const handleSaveOrUpdate = async (downloadURL?: string) => {
-    const opType = selectedSuperHero ? HTTP_METHOD_KEYS.put : HTTP_METHOD_KEYS.post;
+  const handleSave = async (downloadURL?: string) => {
+    const opType = selectedSuperHero
+      ? HTTP_METHOD_KEYS.put
+      : HTTP_METHOD_KEYS.post;
     await saveOrUpdate(
       opType,
       {
@@ -121,7 +124,15 @@ export const SuperHeroDetailPage = () => {
     <form onSubmit={handleSubmit(onSubmit)} onReset={onReset}>
       <FormCard
         title={translate('superHeroes.detail.title')}
-        actions={<FormCardActions view={view} />}
+        actions={
+          <FormCardActions
+            isEditOrView={!!id}
+            view={view}
+            cancelButtonText={translate('globals.buttons.cancel')}
+            resetButtonText={translate('globals.buttons.reset')}
+            saveButtonText={translate('globals.buttons.save')}
+          />
+        }
       >
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -161,7 +172,7 @@ export const SuperHeroDetailPage = () => {
                 'superHeroes.detail.form.genrePlaceHolder',
               )}
               options={genres}
-              optionLabels={{ path: 'globals.enums.genres', type: GenreEnum }}
+              optionLabelPath="globals.enums.genres"
               error={errors?.genre}
               disabled={view}
             />
@@ -220,8 +231,10 @@ export const SuperHeroDetailPage = () => {
               seletedItemPicture={selectedSuperHero?.picture}
               error={errors?.picture}
               view={view}
-              handleSaveOrUpdate={handleSaveOrUpdate}
+              onSave={handleSave}
               ref={imgUploadRef}
+              previewCardTitle={translate('globals.detail.previewCardTitle')}
+              imageErrorMessage={translate('globals.toasts.imageError')}
             />
           </Grid>
         </Grid>

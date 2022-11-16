@@ -20,7 +20,6 @@ import {
 } from '@mui/material';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { useSnackbar } from 'notistack';
 
@@ -28,12 +27,38 @@ import { fileName, fileRef, fileToBase64String } from 'utils';
 import { ANCHOR_ORIGIN } from 'constant';
 
 interface FormImgUploadProps {
+  /**
+   * Name of uncontrol
+   */
   name: string;
+  /**
+   * Uncontrol value
+   */
   register: UseFormRegister<FieldValues>;
-  handleSaveOrUpdate: (downloadURL?: string) => Promise<void>;
+  /**
+   * Fired when init save process.
+   */
+  onSave: (downloadURL?: string) => Promise<void>;
+  /**
+   * Default picture value. If valid for edit mode
+   */
   seletedItemPicture?: string;
+  /**
+   * Error object from useForm
+   */
   error?: Record<string, unknown>;
+  /**
+   * Flag for view mode
+   */
   view?: boolean;
+  /**
+   * Optional preview card title. By default is Preview
+   */
+  previewCardTitle?: string;
+  /**
+   * Optional upload image error message. By default is Image upload failed
+   */
+  imageErrorMessage?: string;
 }
 
 export interface FormImgUploadExpose {
@@ -46,6 +71,11 @@ export interface ImgUploadState {
   uploadProgress: number;
 }
 
+/**
+ * FormImgUpload is a file image uploader & preview file using mui.
+ * The ref prop is important for calling initUploading method from the parent component,
+ * when you needs to start the upload process.
+ */
 export const FormImgUpload = forwardRef<
   FormImgUploadExpose,
   FormImgUploadProps
@@ -54,14 +84,15 @@ export const FormImgUpload = forwardRef<
     {
       name,
       register,
-      handleSaveOrUpdate,
+      onSave,
       seletedItemPicture,
       error,
       view,
+      previewCardTitle = 'Preview',
+      imageErrorMessage = 'Image upload failed',
     }: FormImgUploadProps,
     ref,
   ) => {
-    const { t: translate } = useTranslation();
     const { enqueueSnackbar } = useSnackbar();
     const [{ isUploading, previewPicture, uploadProgress }, setImgUploadState] =
       useState<ImgUploadState>({
@@ -86,20 +117,20 @@ export const FormImgUpload = forwardRef<
           }));
         },
         () => {
-          enqueueSnackbar(translate('globals.toasts.imageError'), {
+          enqueueSnackbar(imageErrorMessage, {
             variant: 'error',
             anchorOrigin: ANCHOR_ORIGIN,
           });
         },
         async () => {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          handleSaveOrUpdate(downloadURL);
+          onSave(downloadURL);
         },
       );
-    }, [enqueueSnackbar, handleSaveOrUpdate, isUploading, translate]);
+    }, [enqueueSnackbar, onSave, imageErrorMessage, isUploading]);
 
     useImperativeHandle(ref, () => ({
-      initUploading: () => 
+      initUploading: () =>
         setImgUploadState((state) => ({ ...state, isUploading: true })),
     }));
 
@@ -151,7 +182,7 @@ export const FormImgUpload = forwardRef<
               }}
             >
               <Typography gutterBottom variant="h5" component="div">
-                {translate('globals.detail.previewCardTitle')}
+                {previewCardTitle}
               </Typography>
               <CardMedia
                 sx={{

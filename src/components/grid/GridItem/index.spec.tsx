@@ -16,8 +16,12 @@ describe('GridItem', () => {
           <GridItem
             columns={columns}
             row={row}
-            onAddOrEditOrView={onAddOrEditOrView}
+            onView={onAddOrEditOrView}
+            onEdit={onAddOrEditOrView}
             onDelete={onDelete}
+            confirmDialogConfig={{
+              title: 'Test'
+            }}
           />
         </tbody>
       </table>,
@@ -65,9 +69,9 @@ describe('GridItem', () => {
     const deleteButton = screen.getByTestId('icon-button-delete');
     fireEvent.click(deleteButton);
     expect(
-      screen.getByText('globals.dialogs.delete.title'),
+      screen.getByText('Test'),
     ).toBeInTheDocument();
-    const confirmButton = screen.getByText('globals.buttons.confirm');
+    const confirmButton = screen.getByText('Confirm');
     fireEvent.click(confirmButton);
     expect(onDelete).toHaveBeenCalledWith(mockRow);
   });

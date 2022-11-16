@@ -32,7 +32,7 @@ describe('SuperHeroGridPage', () => {
     const input = screen.getByRole('searchbox') as HTMLInputElement;
     fireEvent.change(input, { target: { value: 'man' } });
     expect(
-      await screen.findByText('globals.grid.noMatchingDataText'),
+      await screen.findByTestId('empty-grid-row'),
     ).not.toBeInTheDocument();
   });
 
@@ -41,7 +41,7 @@ describe('SuperHeroGridPage', () => {
     const input = screen.getByRole('searchbox') as HTMLInputElement;
     fireEvent.change(input, { target: { value: 'ma' } });
     expect(
-      screen.getByText('globals.grid.noMatchingDataText'),
+      screen.getByTestId('empty-grid-row'),
     ).toBeInTheDocument();
   });
 });

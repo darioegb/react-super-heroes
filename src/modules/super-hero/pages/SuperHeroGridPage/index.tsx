@@ -31,7 +31,11 @@ export const SuperHeroGridPage = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           {translate('superHeroes.title')}
         </Typography>
-        <FilterGrid handleChange={handleChange} />
+        <FilterGrid
+          label={translate('globals.grid.filterInput.label')}
+          placeholder={translate('globals.grid.filterInput.placeholder')}
+          onChange={handleChange}
+        />
       </Toolbar>
       <SuperHeroGrid count={count} />
     </Paper>

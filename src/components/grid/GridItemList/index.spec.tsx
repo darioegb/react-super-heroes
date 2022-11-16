@@ -50,7 +50,8 @@ describe('SuperHeroGridItemList', () => {
                     key={item.name}
                     row={item}
                     columns={columns}
-                    onAddOrEditOrView={onAddOrEditOrView}
+                    onView={onAddOrEditOrView}
+                    onEdit={onAddOrEditOrView}
                     onDelete={onDelete}
                   />
                 )}

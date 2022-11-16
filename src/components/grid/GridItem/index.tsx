@@ -4,24 +4,49 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { Column } from 'interfaces';
+import { Column, ConfirmDialogConfig } from 'interfaces';
 import { ConfirmDialog } from 'components/ConfirmDialog';
-import { useTranslation } from 'react-i18next';
 
 interface GridItemProps<T> {
+  /**
+   * Row item
+   */
   row: T;
+  /**
+   * Column list
+   */
   columns: Column<T>[];
-  onAddOrEditOrView: (item?: T, view?: boolean) => void;
+  /**
+   * Confirm dialog texts: title, cancelButtonText & confirmButtonText
+   */
+   confirmDialogConfig?: ConfirmDialogConfig;
+  /**
+   * Fired when view button is clicked
+   */
+  onView: (item: T, view: boolean) => void;
+  /**
+   * Fired when edit button is clicked
+   */
+  onEdit: (item: T) => void;
+  /**
+   * Fired when delete button is clicked
+   */
   onDelete: (item: T) => void;
 }
 
+/**
+ * GridItem is row grid using mui.
+ */
 export const GridItem = <T extends unknown>({
   columns,
   row,
-  onAddOrEditOrView,
+  confirmDialogConfig: { title = '', cancelButtonText, confirmButtonText } = {
+    title: '',
+  },
+  onView,
+  onEdit,
   onDelete,
 }: GridItemProps<T>) => {
-  const { t: translate } = useTranslation();
   const [open, setOpen] = useState(false);
 
   const handleDelete = () => setOpen(true);
@@ -41,14 +66,14 @@ export const GridItem = <T extends unknown>({
               column.format && typeof value === 'number' ? (
                 column.format(value)
               ) : (
-                value || '-'
+                value ?? '-'
               )
             ) : (
               <img
                 style={{ maxWidth: '5rem' }}
                 alt="item or alt"
                 src={
-                  (value as unknown as string) ||
+                  (value as unknown as string) ??
                   `${process.env.PUBLIC_URL}/img/no-image.png`
                 }
               />
@@ -60,7 +85,7 @@ export const GridItem = <T extends unknown>({
         <IconButton
           data-testid="icon-button-visibility"
           aria-label="visibility"
-          onClick={() => onAddOrEditOrView(row, true)}
+          onClick={() => onView(row, true)}
         >
           <VisibilityIcon />
         </IconButton>
@@ -68,7 +93,7 @@ export const GridItem = <T extends unknown>({
           color="primary"
           data-testid="icon-button-edit"
           aria-label="edit"
-          onClick={() => onAddOrEditOrView(row)}
+          onClick={() => onEdit(row)}
         >
           <EditIcon />
         </IconButton>
@@ -83,9 +108,9 @@ export const GridItem = <T extends unknown>({
       </TableCell>
       <ConfirmDialog
         open={open}
-        title={translate('globals.dialogs.delete.title', {
-          value: row['name' as keyof T],
-        })}
+        title={title}
+        cancelButtonText={cancelButtonText}
+        confirmButtonText={confirmButtonText}
         onClose={handleClose}
       />
     </TableRow>

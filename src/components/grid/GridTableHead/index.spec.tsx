@@ -21,7 +21,7 @@ describe('GridTableHead', () => {
           order={'desc'}
           orderBy={'name'}
           onRequestSort={onRequestSort}
-          onAddOrEditOrView={onAddOrEditOrView}
+          onAdd={onAddOrEditOrView}
         />
       </table>,
     );

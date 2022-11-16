@@ -43,7 +43,7 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
       id: 'genre',
       label: translate('superHeroes.grid.columns.genre'),
       format: (value: number) =>
-        dropdownTranslate('globals.enums.genres', value, GenreEnum),
+        dropdownTranslate('globals.enums.genres', GenreEnum[value]),
     },
     {
       id: 'specialty',

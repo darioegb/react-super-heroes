@@ -10,12 +10,38 @@ import { useTranslation } from 'react-i18next';
 import WifiIcon from '@mui/icons-material/Wifi';
 import WifiOffIcon from '@mui/icons-material/WifiOff';
 
-import { Title } from 'components';
-import { LOCALES } from 'constant';
 import { SupportedLocales } from 'types';
 import { useApp, useOnline } from 'hooks';
+import { Localization } from '@mui/material/locale';
 
-export const Navbar = () => {
+interface NavbarProps {
+  /**
+   * Navbar title
+   */
+  title: string;
+  /**
+   * Locales is an object that contains all the necessary locations as properties of said object extracted from mui locale
+   */
+  locales?: { [key: string]: Localization };
+  /**
+   * Select options path to translate values using useTranslation from react-i18next. is required if locales was set
+   */
+  localesLabelPath?: string;
+  /**
+   * Is a flag to display online status. By default is true
+   */
+  showOnlineStatus?: boolean;
+}
+
+/**
+ * Navbar is top navbar using mui. It display status connection and combobox to change language.
+ */
+export const Navbar = ({
+  title,
+  locales,
+  localesLabelPath,
+  showOnlineStatus = true,
+}: NavbarProps) => {
   const { t: translate, i18n } = useTranslation();
   const { locale, setThemeLocale } = useApp();
   const { isOnline } = useOnline();
@@ -32,16 +58,18 @@ export const Navbar = () => {
         variant="dense"
         sx={{ display: 'flex', justifyContent: 'space-between' }}
       >
-        <Typography variant="h6" color="inherit" component="div">
-          <Title />
-        </Typography>
+        <Typography variant="h6">{title}</Typography>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          {isOnline ? (
-            <WifiIcon className="icon-left" />
-          ) : (
-            <WifiOffIcon className="icon-left" />
+          {showOnlineStatus && (
+            <span>
+              {isOnline ? (
+                <WifiIcon className="icon-left" />
+              ) : (
+                <WifiOffIcon className="icon-left" />
+              )}
+            </span>
           )}
-          <Select
+          {locales && <Select
             data-testid="select-locale"
             value={locale}
             onChange={handleChange}
@@ -61,12 +89,12 @@ export const Navbar = () => {
               },
             }}
           >
-            {Object.keys(LOCALES).map((key) => (
+            {Object.keys(locales).map((key) => (
               <MenuItem value={key} key={key}>
-                {translate(`globals.locales.${key.substring(0, 2)}`)}
+                {translate(`${localesLabelPath}.${key.substring(0, 2)}`)}
               </MenuItem>
             ))}
-          </Select>
+          </Select>}
         </div>
       </Toolbar>
     </AppBar>

@@ -20,7 +20,7 @@ jest.mock('firebase/storage', () => ({
 }));
 
 describe('FormImgUpload', () => {
-  const handleSaveOrUpdate = jest.fn();
+  const handleSave = jest.fn();
   const file = new File(['foo'], 'foo.png', {
     type: 'image/png',
   });
@@ -59,7 +59,7 @@ describe('FormImgUpload', () => {
           seletedItemPicture={undefined}
           error={errors?.test}
           view={false}
-          handleSaveOrUpdate={handleSaveOrUpdate}
+          onSave={handleSave}
           ref={imgUploadRef}
         />
         <button type="submit">SUBMIT</button>
@@ -103,7 +103,7 @@ describe('FormImgUpload', () => {
     userEvent.upload(input, file);
     fireEvent.click(button);
     await waitFor(() => {
-      expect(handleSaveOrUpdate).toHaveBeenCalled();
+      expect(handleSave).toHaveBeenCalled();
     });
   });
 
@@ -144,7 +144,7 @@ describe('FormImgUpload', () => {
     userEvent.upload(input, file);
     fireEvent.click(button);
     await waitFor(() => {
-      expect(mockSnackBar).toHaveBeenCalledWith('globals.toasts.imageError', {
+      expect(mockSnackBar).toHaveBeenCalledWith('Image upload failed', {
         anchorOrigin: { horizontal: 'right', vertical: 'top' },
         variant: 'error',
       });
