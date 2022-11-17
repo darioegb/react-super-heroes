@@ -21,6 +21,19 @@ export default {
     showOnlineStatus: true,
   },
   decorators: [(Story) => <AppProvider>{Story()}</AppProvider>],
+  parameters: {
+    docs: {
+      source: {
+        code: `
+        <Navbar
+          title="Title"
+          localesLabelPath="globals.locales"
+          locales={LOCALES}
+        />`,
+        language: 'html',
+      },
+    },
+  },
 } as ComponentMeta<typeof Navbar>;
 
 const Template: ComponentStory<typeof Navbar> = (args) => <Navbar {...args} />;

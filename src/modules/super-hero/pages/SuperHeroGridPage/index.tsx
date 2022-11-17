@@ -41,3 +41,5 @@ export const SuperHeroGridPage = () => {
     </Paper>
   );
 };
+
+export default SuperHeroGridPage;

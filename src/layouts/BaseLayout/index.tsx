@@ -16,9 +16,9 @@ export const BaseLayout = ({ children }: BaseLayoutProps) => {
   return (
     <>
       <Navbar
+        localesLabelPath="globals.locales"
         title={translate('globals.title')}
         locales={LOCALES}
-        localesLabelPath={'globals.locales'}
       />
       <GlobalLoader loading={loading} />
       <main className="body">{children}</main>

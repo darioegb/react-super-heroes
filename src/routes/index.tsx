@@ -1,7 +1,6 @@
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
-import { NotFound } from 'pages/NotFound';
-import { SuperHeroRouter } from 'modules/super-hero';
+import { routes } from './routes';
 
 export const AppRouter = () => {
   return (
@@ -10,8 +9,9 @@ export const AppRouter = () => {
         <Route exact path="/">
           <Redirect to="/superheroes" />
         </Route>
-        <Route path="/superheroes*" component={SuperHeroRouter} />
-        <Route path="*" component={NotFound} />
+        {routes.map((route, i) => (
+          <Route key={i} {...route} />
+        ))}
       </Switch>
     </BrowserRouter>
   );

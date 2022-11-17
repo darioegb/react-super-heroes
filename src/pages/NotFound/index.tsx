@@ -36,3 +36,5 @@ export const NotFound = () => {
     </Paper>
   );
 };
+
+export default NotFound;

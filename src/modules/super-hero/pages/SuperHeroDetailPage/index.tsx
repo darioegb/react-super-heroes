@@ -242,3 +242,5 @@ export const SuperHeroDetailPage = () => {
     </form>
   );
 };
+
+export default SuperHeroDetailPage;
