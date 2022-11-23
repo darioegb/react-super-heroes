@@ -1,5 +1,5 @@
 import { CardActions, Button } from '@mui/material';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface FormCardActionsProps {
   /**
@@ -33,9 +33,9 @@ export const FormCardActions = ({
   resetButtonText = 'Reset',
   saveButtonText = 'Save',
 }: FormCardActionsProps) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const goBack = () => history.goBack();
+  const goBack = () => navigate(-1);
 
   return (
     <CardActions>

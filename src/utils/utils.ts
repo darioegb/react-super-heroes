@@ -16,12 +16,9 @@ export const getEnumKeys = <T extends {}>(type: T): string[] =>
  * @param type enum
  * @example [ { key: 'A', value: 1 }, { key: 'B', value: 2 } ]
  */
-export const convertEnumToKeyValueArray = <T extends {}>(
-  type: T,
-): Option[] =>
+export const convertEnumToKeyValueArray = <T extends {}>(type: T): Option[] =>
   getEnumKeys(type).map(
-    (key) =>
-      ({ key, value: type[key as keyof typeof type] as unknown } as Option),
+    (key) => ({ key, value: type[key as keyof typeof type] } as Option),
   );
 
 // Comparator functions

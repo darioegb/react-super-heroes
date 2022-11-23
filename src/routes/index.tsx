@@ -1,18 +1,28 @@
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { lazy } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { routes } from './routes';
+import { RouteObject } from 'interfaces';
+import { SuperHeroRouter } from 'modules/super-hero/routes';
 
 export const AppRouter = () => {
+  const routes: RouteObject[] = [
+    {
+      path: '/superheroes*',
+      Component: SuperHeroRouter,
+    },
+    {
+      path: '*',
+      Component: lazy(
+        () => import(/* webpackChunkName: "not-found" */ 'pages/NotFound'),
+      ),
+    },
+  ];
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/superheroes" />
-        </Route>
-        {routes.map((route, i) => (
-          <Route key={i} {...route} />
-        ))}
-      </Switch>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Navigate to="/superheroes" replace />} />
+      {routes.map(({ Component, ...others }, i) => (
+        <Route key={i} element={<Component />} {...others} />
+      ))}
+    </Routes>
   );
 };

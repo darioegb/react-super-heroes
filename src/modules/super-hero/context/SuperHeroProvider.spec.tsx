@@ -1,19 +1,11 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import { instances } from 'config/httpCommon';
 import { useSuperHero } from 'modules/super-hero/hooks/useSuperHero';
 import { SuperHeroProvider } from './SuperHeroProvider';
 import { GenreEnum } from 'constant';
-import { mockSnackBar } from 'setupTests';
-
-const mockFn = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-  useHistory: () => ({
-    push: mockFn,
-  }),
-}));
+import { mockSnackBar, mockUseNavigate } from 'setupTests';
 
 describe('SuperHeroProvider', () => {
   const [instance] = instances;
@@ -48,7 +40,6 @@ describe('SuperHeroProvider', () => {
     );
   };
 
-
   it('should render SuperHeroProvider', () => {
     render(<SuperHeroProvider children={<div>test provider</div>} />);
     expect(screen.getByText('test provider')).toBeInTheDocument();
@@ -56,28 +47,30 @@ describe('SuperHeroProvider', () => {
 
   it('should execute onAddOrEditOrView when click add button', () => {
     render(<SuperHeroProvider children={<SuperHeroProviderHost />} />, {
-      wrapper: MemoryRouter,
+      wrapper: BrowserRouter,
     });
     const button = screen.getByText('ADD');
     button && fireEvent.click(button);
-    expect(mockFn).toHaveBeenCalled();
+    expect(mockUseNavigate).toHaveBeenCalled();
   });
 
   it('should execute onAddOrEditOrView when click edit button', () => {
     render(<SuperHeroProvider children={<SuperHeroProviderHost />} />, {
-      wrapper: MemoryRouter,
+      wrapper: BrowserRouter,
     });
     const button = screen.getByText('EDIT');
     button && fireEvent.click(button);
-    expect(mockFn).toHaveBeenCalledWith('/superheroes/detail/1', {
-      view: false,
+    expect(mockUseNavigate).toHaveBeenCalledWith('/superheroes/detail/1', {
+      state: {
+        view: false,
+      },
     });
   });
 
   it('should execute onDelete when click delete button', async () => {
     instance.delete = jest.fn().mockResolvedValueOnce('default');
     render(<SuperHeroProvider children={<SuperHeroProviderHost />} />, {
-      wrapper: MemoryRouter,
+      wrapper: BrowserRouter,
     });
     const button = screen.getByText('DELETE');
     button && fireEvent.click(button);
@@ -89,7 +82,7 @@ describe('SuperHeroProvider', () => {
   it("should'n execute onDelete when click delete button when failed", async () => {
     instance.delete = jest.fn().mockRejectedValueOnce(new Error('Async error'));
     render(<SuperHeroProvider children={<SuperHeroProviderHost />} />, {
-      wrapper: MemoryRouter,
+      wrapper: BrowserRouter,
     });
     const button = screen.getByText('DELETE');
     button && fireEvent.click(button);
@@ -104,7 +97,7 @@ describe('SuperHeroProvider', () => {
   it('should execute saveOrUpdate when click on save button', async () => {
     instance.post = jest.fn().mockResolvedValueOnce({ data: mockSuperHero });
     render(<SuperHeroProvider children={<SuperHeroProviderHost />} />, {
-      wrapper: MemoryRouter,
+      wrapper: BrowserRouter,
     });
     const button = screen.getByText('SAVE');
     button && fireEvent.click(button);
@@ -116,7 +109,7 @@ describe('SuperHeroProvider', () => {
   it('should execute saveOrUpdate when click on update button', async () => {
     instance.put = jest.fn().mockResolvedValueOnce({ data: mockSuperHero });
     render(<SuperHeroProvider children={<SuperHeroProviderHost />} />, {
-      wrapper: MemoryRouter,
+      wrapper: BrowserRouter,
     });
     const button = screen.getByText('UPDATE');
     button && fireEvent.click(button);

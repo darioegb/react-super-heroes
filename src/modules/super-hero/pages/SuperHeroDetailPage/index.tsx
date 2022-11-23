@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef } from 'react';
 import { Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -32,7 +32,8 @@ const { text, number, textarea } = DEFAULT_FORM_CONTROL_SIZES;
 
 export const SuperHeroDetailPage = () => {
   const { t: translate } = useTranslation();
-  const history = useHistory();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { selectedSuperHero, saveOrUpdate } = useSuperHero();
   const [superHero, setSuperHero] = useState<SuperHero>();
   const imgUploadRef = useRef<FormImgUploadExpose>(null);
@@ -86,7 +87,7 @@ export const SuperHeroDetailPage = () => {
     mode: 'all',
     resolver: yupResolver(schema),
   });
-  const view = (history.location.state as { view: boolean })?.view;
+  const view = (location?.state as { view: boolean })?.view;
   const { id } = useParams<{ id: string }>();
   const genres: Option[] = convertEnumToKeyValueArray(GenreEnum);
 
@@ -118,7 +119,7 @@ export const SuperHeroDetailPage = () => {
 
   const onReset = () => reset();
 
-  const handleReturn = () => history.goBack();
+  const handleReturn = () => navigate(-1);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} onReset={onReset}>

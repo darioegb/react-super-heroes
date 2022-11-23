@@ -1,6 +1,6 @@
 import { useCallback, useReducer } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
 import {
@@ -27,7 +27,7 @@ interface SuperHeroProviderProps {
 export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
   const { t: translate } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { dropdownTranslate } = useCustomTranslate();
   const [instance] = instances;
   const resourceUrl = 'superHeroes';
@@ -66,10 +66,10 @@ export const SuperHeroProvider = ({ children }: SuperHeroProviderProps) => {
         type: '[SuperHero] set selected',
         payload: { superHero: item },
       });
-      history.push(`/superheroes/detail/${item?.id}`, { view });
+      navigate(`/superheroes/detail/${item?.id}`, { state: { view } });
       return;
     }
-    history.push('/superheroes/detail');
+    navigate('/superheroes/detail');
   };
 
   const onDelete = async (item: SuperHero) => {

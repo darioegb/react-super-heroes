@@ -1,3 +1,4 @@
+import { useReducer } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import { SuperHeroGrid } from '.';
@@ -12,7 +13,6 @@ import {
 } from 'modules/super-hero/interfaces/superHero';
 import { superHeroReducer } from 'modules/super-hero/store/superHeroReducer';
 import { Column } from 'interfaces';
-import { useReducer } from 'react';
 
 describe('SuperHeroGrid', () => {
   const mockDispatch = jest.fn();

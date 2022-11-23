@@ -2,9 +2,7 @@ import { LazyExoticComponent } from 'react';
 
 import { JSXComponent } from 'types';
 
-export interface RouteConfig {
+export interface RouteObject {
   path: string;
-  component: LazyExoticComponent<JSXComponent> | JSXComponent;
-  exact?: boolean;
-  children?: RouteConfig[];
+  Component: LazyExoticComponent<JSXComponent> | JSXComponent;
 }

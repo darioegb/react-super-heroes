@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import './styles.scss';
 import App from './App';
@@ -12,11 +13,13 @@ import { AppProvider } from 'context';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppProvider>
-      <SystemTheme>
-        <App />
-      </SystemTheme>
-    </AppProvider>
+    <BrowserRouter>
+      <AppProvider>
+        <SystemTheme>
+          <App />
+        </SystemTheme>
+      </AppProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );
