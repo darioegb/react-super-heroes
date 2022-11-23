@@ -20,7 +20,7 @@ export const NotFound = () => {
       <Typography variant="h1" fontSize="30vh" mb={10}>
         {translate('pageNotFound.title')}
       </Typography>
-      <Typography variant="h2" mb={5} sx={{opacity: '.4'}}>
+      <Typography variant="h2" mb={5} sx={{ opacity: '.4' }}>
         {translate('pageNotFound.subtitle')}
       </Typography>
       <Button

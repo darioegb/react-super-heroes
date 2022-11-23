@@ -14,8 +14,8 @@ export const useEventListener = (
 
     return () => {
       Array.isArray(event)
-      ? event.forEach((item) => target.removeEventListener(item, callback))
-      : target.removeEventListener(event, callback);
+        ? event.forEach((item) => target.removeEventListener(item, callback))
+        : target.removeEventListener(event, callback);
     };
   });
 };

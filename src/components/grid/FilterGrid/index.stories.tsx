@@ -22,6 +22,6 @@ const Template: ComponentStory<typeof FilterGrid> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-    label: 'Search',
-    placeholder: 'ex. test',
-  };
+  label: 'Search',
+  placeholder: 'ex. test',
+};

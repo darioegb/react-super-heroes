@@ -8,7 +8,7 @@ describe('EmptyGrid', () => {
     render(
       <table>
         <tbody>
-          <EmptyGrid message={message} value='' />
+          <EmptyGrid message={message} value="" />
         </tbody>
       </table>,
     );

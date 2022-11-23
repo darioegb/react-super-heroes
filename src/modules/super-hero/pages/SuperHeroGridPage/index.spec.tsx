@@ -31,17 +31,13 @@ describe('SuperHeroGridPage', () => {
     render(<SuperHeroProvider children={<SuperHeroGridPage />} />);
     const input = screen.getByRole('searchbox') as HTMLInputElement;
     fireEvent.change(input, { target: { value: 'man' } });
-    expect(
-      await screen.findByTestId('empty-grid-row'),
-    ).not.toBeInTheDocument();
+    expect(await screen.findByTestId('empty-grid-row')).not.toBeInTheDocument();
   });
 
   it("should'n change filter value when the input value is changed", () => {
     render(<SuperHeroProvider children={<SuperHeroGridPage />} />);
     const input = screen.getByRole('searchbox') as HTMLInputElement;
     fireEvent.change(input, { target: { value: 'ma' } });
-    expect(
-      screen.getByTestId('empty-grid-row'),
-    ).toBeInTheDocument();
+    expect(screen.getByTestId('empty-grid-row')).toBeInTheDocument();
   });
 });

@@ -6,10 +6,8 @@ import { isErrorMessage } from 'utils';
 
 export const useCustomTranslate = () => {
   const { t: translate } = useTranslation();
-  const dropdownTranslate = (
-    path: string,
-    value: string,
-  ): string => translate(`${path}.${value?.toLowerCase()}`);
+  const dropdownTranslate = (path: string, value: string): string =>
+    translate(`${path}.${value?.toLowerCase()}`);
   const rowPerPageTranslate = () => [
     ...ROWS_PER_PAGE_CONFIG,
     { value: -1, label: translate('globals.paginationAllOption') },

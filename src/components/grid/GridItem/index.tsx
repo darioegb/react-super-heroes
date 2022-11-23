@@ -19,7 +19,7 @@ interface GridItemProps<T> {
   /**
    * Confirm dialog texts: title, cancelButtonText & confirmButtonText
    */
-   confirmDialogConfig?: ConfirmDialogConfig;
+  confirmDialogConfig?: ConfirmDialogConfig;
   /**
    * Fired when view button is clicked
    */

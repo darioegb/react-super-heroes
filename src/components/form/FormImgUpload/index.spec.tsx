@@ -72,7 +72,7 @@ describe('FormImgUpload', () => {
     input = screen.getByTestId('input-image-file')
       .childNodes[1] as HTMLInputElement;
     button = screen.getByText('SUBMIT') as HTMLButtonElement;
-  }
+  };
 
   it('should render FormImgUpload', () => {
     initRender();

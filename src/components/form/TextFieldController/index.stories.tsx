@@ -48,9 +48,7 @@ const Template: ComponentStory<typeof TextfieldController> = (args) => {
   const schema = useMemo(
     () =>
       yup.object().shape({
-        [args.name]: yup
-          .string()
-          .required(),
+        [args.name]: yup.string().required(),
       }),
     [args.name],
   );

@@ -69,32 +69,34 @@ export const Navbar = ({
               )}
             </span>
           )}
-          {locales && <Select
-            data-testid="select-locale"
-            value={locale}
-            onChange={handleChange}
-            sx={{
-              color: 'white',
-              '.MuiSelect-icon': {
+          {locales && (
+            <Select
+              data-testid="select-locale"
+              value={locale}
+              onChange={handleChange}
+              sx={{
                 color: 'white',
-              },
-            }}
-            MenuProps={{
-              PaperProps: {
-                sx: {
-                  '& .MuiMenuItem-root': {
-                    color: 'black',
+                '.MuiSelect-icon': {
+                  color: 'white',
+                },
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    '& .MuiMenuItem-root': {
+                      color: 'black',
+                    },
                   },
                 },
-              },
-            }}
-          >
-            {Object.keys(locales).map((key) => (
-              <MenuItem value={key} key={key}>
-                {translate(`${localesLabelPath}.${key.substring(0, 2)}`)}
-              </MenuItem>
-            ))}
-          </Select>}
+              }}
+            >
+              {Object.keys(locales).map((key) => (
+                <MenuItem value={key} key={key}>
+                  {translate(`${localesLabelPath}.${key.substring(0, 2)}`)}
+                </MenuItem>
+              ))}
+            </Select>
+          )}
         </div>
       </Toolbar>
     </AppBar>

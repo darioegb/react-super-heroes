@@ -20,7 +20,7 @@ describe('GridItem', () => {
             onEdit={onAddOrEditOrView}
             onDelete={onDelete}
             confirmDialogConfig={{
-              title: 'Test'
+              title: 'Test',
             }}
           />
         </tbody>
@@ -68,9 +68,7 @@ describe('GridItem', () => {
     initRender();
     const deleteButton = screen.getByTestId('icon-button-delete');
     fireEvent.click(deleteButton);
-    expect(
-      screen.getByText('Test'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('Test')).toBeInTheDocument();
     const confirmButton = screen.getByText('Confirm');
     fireEvent.click(confirmButton);
     expect(onDelete).toHaveBeenCalledWith(mockRow);

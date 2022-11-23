@@ -13,9 +13,9 @@ describe('FormCardActions', () => {
   });
 
   it('should goback when click cancel button', () => {
-    render(
-        <FormCardActions isEditOrView={false} view={false} />, {wrapper: BrowserRouter}
-    );
+    render(<FormCardActions isEditOrView={false} view={false} />, {
+      wrapper: BrowserRouter,
+    });
     const cancelButton = screen.getByText('Cancel');
     fireEvent.click(cancelButton);
     expect(mockUseNavigate).toHaveBeenCalled();

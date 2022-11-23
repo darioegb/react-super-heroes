@@ -14,7 +14,10 @@ export const GlobalLoader = ({ loading }: GlobalLoaderProps) => {
     <>
       {loading && (
         <Stack alignItems="center">
-          <CircularProgress data-testid="global-loader" sx={{ margin: '.5rem' }} />
+          <CircularProgress
+            data-testid="global-loader"
+            sx={{ margin: '.5rem' }}
+          />
         </Stack>
       )}
     </>

@@ -8,7 +8,7 @@ export default {
   component: GridTableHead,
   argTypes: {
     orderBy: {
-      control: 'text'
+      control: 'text',
     },
   },
   decorators: [(Story) => <Table>{Story()}</Table>],
@@ -43,7 +43,7 @@ Default.args = {
     { id: 'email' as never, label: 'Email' },
   ],
   order: 'asc',
-  orderBy: 'firstName' as never
+  orderBy: 'firstName' as never,
 };
 
 export const OrderDesc = Template.bind({});

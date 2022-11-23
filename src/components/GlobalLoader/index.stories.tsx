@@ -8,7 +8,7 @@ export default {
   parameters: {
     docs: {
       source: {
-        code: '<GlobalLoader loading={loading} />'
+        code: '<GlobalLoader loading={loading} />',
       },
     },
   },

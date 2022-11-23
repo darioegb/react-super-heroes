@@ -5,7 +5,7 @@ interface FormCardActionsProps {
   /**
    * Flag to disabled reset button. Is true when card is on edit or view mode
    */
-   isEditOrView: boolean;
+  isEditOrView: boolean;
   /**
    * Flag to disabled submit button. Is true if card is on view mode
    */
