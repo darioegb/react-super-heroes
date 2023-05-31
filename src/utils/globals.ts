@@ -2,13 +2,15 @@ import { SnackbarOrigin } from 'notistack';
 import { esES, enUS } from '@mui/material/locale';
 
 import { PageConfig } from 'interfaces';
+import { HttpMethod } from 'types';
 
 export const ID_KEY = 'id';
-export const HTTP_METHOD_KEYS = {
+export const HTTP_METHOD_KEYS: Record<HttpMethod, string> = {
   get: 'get',
   delete: 'delete',
   post: 'create',
   put: 'update',
+  patch: 'update'
 };
 export const ROWS_PER_PAGE_CONFIG = [5, 10, 15, 20, 30, 50, 100];
 export const DEFAULT_PAGE_CONFIG: PageConfig<unknown> = {

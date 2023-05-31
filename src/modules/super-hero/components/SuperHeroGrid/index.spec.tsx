@@ -6,13 +6,14 @@ import {
   SuperHeroContext,
   SuperHeroProvider,
 } from 'modules/super-hero/context';
-import { DEFAULT_PAGE_CONFIG, GenreEnum } from 'constant';
+import { DEFAULT_PAGE_CONFIG } from 'utils';
 import {
   SuperHero,
   SuperHeroState,
 } from 'modules/super-hero/interfaces/superHero';
 import { superHeroReducer } from 'modules/super-hero/store/superHeroReducer';
 import { Column } from 'interfaces';
+import { GenreEnum } from 'enums';
 
 describe('SuperHeroGrid', () => {
   const mockDispatch = jest.fn();

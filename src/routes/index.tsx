@@ -7,7 +7,7 @@ import { SuperHeroRouter } from 'modules/super-hero/routes';
 export const AppRouter = () => {
   const routes: RouteObject[] = [
     {
-      path: '/superheroes*',
+      path: '/superheroes/*',
       Component: SuperHeroRouter,
     },
     {

@@ -1,4 +1,5 @@
-import { DEFAULT_PAGE_CONFIG, GenreEnum } from 'constant';
+import { GenreEnum } from 'enums';
+import { DEFAULT_PAGE_CONFIG } from 'utils/globals';
 import { SuperHeroState } from 'modules/super-hero/interfaces/superHero';
 import { superHeroReducer } from './superHeroReducer';
 

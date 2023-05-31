@@ -24,7 +24,7 @@ import { uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { useSnackbar } from 'notistack';
 
 import { fileName, fileRef, fileToBase64String } from 'utils';
-import { ANCHOR_ORIGIN } from 'constant';
+import { ANCHOR_ORIGIN } from 'utils/globals';
 
 interface FormImgUploadProps {
   /**

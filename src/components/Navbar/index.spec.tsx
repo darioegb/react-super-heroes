@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { LOCALES } from 'constant';
+import { LOCALES } from 'utils/globals';
 import { AppProvider } from 'context';
 import { Navbar } from '.';
 

@@ -45,7 +45,7 @@ describe('SuperHeroGridItemList', () => {
                 rows={superHeroes}
                 order={'asc'}
                 orderBy={'name'}
-                renderItem={(item) => (
+                renderItem={(item: any) => (
                   <GridItem
                     key={item.name}
                     row={item}

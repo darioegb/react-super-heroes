@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { ROWS_PER_PAGE_CONFIG } from 'constant';
+import { ROWS_PER_PAGE_CONFIG } from 'utils/globals';
 import { ErrorMessage } from 'interfaces';
 import { isErrorMessage } from 'utils';
 
