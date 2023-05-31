@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { SuperHeroProvider } from 'modules/super-hero/context';
 import { BaseLayout } from 'layouts';
 import { RouteObject } from 'interfaces';
-import { ID_KEY } from 'constant';
+import { ID_KEY } from 'utils/globals';
 
 export const SuperHeroRouter = () => {
   const getDetailRoute = () =>

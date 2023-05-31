@@ -9,11 +9,10 @@ import * as yup from 'yup';
 import { Option } from 'interfaces';
 import { convertEnumToKeyValueArray } from 'utils';
 import {
-  GenreEnum,
   HTTP_METHOD_KEYS,
   REG_EXP,
   DEFAULT_FORM_CONTROL_SIZES,
-} from 'constant';
+} from 'utils/globals';
 import {
   SuperHero,
   SuperHeroForm,
@@ -27,6 +26,7 @@ import {
   FormImgUploadExpose,
   FormCardActions,
 } from 'components';
+import { GenreEnum } from 'enums';
 
 const { text, number, textarea } = DEFAULT_FORM_CONTROL_SIZES;
 

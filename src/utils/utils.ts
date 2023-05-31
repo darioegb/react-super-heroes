@@ -1,6 +1,7 @@
 import { firebaseStorage } from 'config/firebase';
-import { PICTURE_BASE_PATH } from 'constant';
+
 import { ref, StorageReference } from 'firebase/storage';
+import { PICTURE_BASE_PATH } from 'utils/globals';
 import { Option, PageConfig } from 'interfaces';
 import { Order } from 'types';
 
@@ -65,7 +66,7 @@ export const fileRef = (fileName: string): StorageReference =>
 export const fileName = (): string => `picture-${Date.now()}`;
 
 export const createHttpParams = <T>(pageConfig: PageConfig<T>) => {
-  let params: Record<string, unknown> = {};
+  let params: any = {};
   const { order, page, rowsPerPage, orderBy, filter } = pageConfig;
 
   if (rowsPerPage < 0) {

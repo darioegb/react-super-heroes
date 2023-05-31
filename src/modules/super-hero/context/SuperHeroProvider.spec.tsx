@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { instances } from 'config/httpCommon';
 import { useSuperHero } from 'modules/super-hero/hooks/useSuperHero';
 import { SuperHeroProvider } from './SuperHeroProvider';
-import { GenreEnum } from 'constant';
 import { mockSnackBar, mockUseNavigate } from 'setupTests';
+import { GenreEnum } from 'enums';
 
 describe('SuperHeroProvider', () => {
   const [instance] = instances;
@@ -68,19 +68,19 @@ describe('SuperHeroProvider', () => {
   });
 
   it('should execute onDelete when click delete button', async () => {
-    instance.delete = jest.fn().mockResolvedValueOnce('default');
+    instance.request = jest.fn().mockResolvedValueOnce('default');
     render(<SuperHeroProvider children={<SuperHeroProviderHost />} />, {
       wrapper: BrowserRouter,
     });
     const button = screen.getByText('DELETE');
     button && fireEvent.click(button);
     await waitFor(() => {
-      expect(instance.delete).toHaveBeenCalled();
+      expect(instance.request).toHaveBeenCalled();
     });
   });
 
   it("should'n execute onDelete when click delete button when failed", async () => {
-    instance.delete = jest.fn().mockRejectedValueOnce(new Error('Async error'));
+    instance.request = jest.fn().mockRejectedValueOnce(new Error('Async error'));
     render(<SuperHeroProvider children={<SuperHeroProviderHost />} />, {
       wrapper: BrowserRouter,
     });
@@ -95,26 +95,26 @@ describe('SuperHeroProvider', () => {
   });
 
   it('should execute saveOrUpdate when click on save button', async () => {
-    instance.post = jest.fn().mockResolvedValueOnce({ data: mockSuperHero });
+    instance.request = jest.fn().mockResolvedValueOnce({ data: mockSuperHero });
     render(<SuperHeroProvider children={<SuperHeroProviderHost />} />, {
       wrapper: BrowserRouter,
     });
     const button = screen.getByText('SAVE');
     button && fireEvent.click(button);
     await waitFor(() => {
-      expect(instance.post).toHaveBeenCalled();
+      expect(instance.request).toHaveBeenCalled();
     });
   });
 
   it('should execute saveOrUpdate when click on update button', async () => {
-    instance.put = jest.fn().mockResolvedValueOnce({ data: mockSuperHero });
+    instance.request = jest.fn().mockResolvedValueOnce({ data: mockSuperHero });
     render(<SuperHeroProvider children={<SuperHeroProviderHost />} />, {
       wrapper: BrowserRouter,
     });
     const button = screen.getByText('UPDATE');
     button && fireEvent.click(button);
     await waitFor(() => {
-      expect(instance.put).toHaveBeenCalled();
+      expect(instance.request).toHaveBeenCalled();
     });
   });
 });

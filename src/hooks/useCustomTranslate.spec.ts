@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 
-import { GenreEnum } from 'constant';
+import { GenreEnum } from 'enums';
 import { useCustomTranslate } from './useCustomTranslate';
 
 describe('useCustomTranslate', () => {

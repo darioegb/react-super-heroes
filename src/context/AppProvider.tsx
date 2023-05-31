@@ -4,7 +4,7 @@ import { AppState } from 'interfaces';
 import { appReducer } from 'store';
 import { AppContext } from './AppContext';
 import { SupportedLocales } from 'types';
-import { LOCALES } from 'constant';
+import { LOCALES } from 'utils/globals';
 
 interface AppProviderProps {
   children: JSX.Element;

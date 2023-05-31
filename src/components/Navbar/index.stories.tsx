@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { LOCALES } from 'constant';
+import { LOCALES } from 'utils/globals';
 import { AppProvider } from 'context';
 
 import { Navbar } from '.';

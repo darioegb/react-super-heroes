@@ -12,13 +12,15 @@ export const SuperHeroGridPage = () => {
   const { pageConfig, filter, getPage, setPageConfig } = useSuperHero();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const count = await getPage(pageConfig);
-      setCount(count);
-    };
-    if (filter?.length > 2 || filter?.length === 0) fetchData();
+    if ((filter?.length ?? 0) > 2 || filter?.length === 0) {
+      const fetchData = async () => {
+        const count = await getPage(pageConfig);
+        setCount(count);
+      };
+      fetchData();
+    }
   }, [filter, getPage, pageConfig]);
-
+  
   const handleChange = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => {

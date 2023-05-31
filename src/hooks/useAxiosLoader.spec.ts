@@ -1,9 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks';
 
 import { instances } from 'config/httpCommon';
-import { GenreEnum } from 'constant';
-import { fetch } from 'utils';
-import { useAxiosLoader } from './useAxiosLoader';
+import { GenreEnum } from 'enums';
+import { useAxiosLoader } from '.';
 
 describe('useAxiosLoader', () => {
   const [instance] = instances;
@@ -11,6 +10,7 @@ describe('useAxiosLoader', () => {
     const { result } = renderHook(() => useAxiosLoader());
     expect(result.current[0]).not.toBeTruthy();
   });
+  
   it('should return true when exist http request', async () => {
     const superHero = {
       id: '1',
@@ -22,11 +22,7 @@ describe('useAxiosLoader', () => {
     // Now mock axios get method
     instance.get = jest.fn().mockResolvedValueOnce(payload);
     const { result } = renderHook(() => useAxiosLoader());
-    const { data } = await fetch({
-      instance,
-      url: 'superHeroes',
-      method: 'get',
-    });
+    const { data } = await instance.get('superHeroes');
     expect(data).toEqual(superHero);
     expect(result.current[0]).not.toBeTruthy();
   });

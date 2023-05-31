@@ -7,7 +7,7 @@ import * as yup from 'yup';
 
 import { FormCard } from '.';
 import { FormCardActions, TextfieldController } from 'components';
-import { DEFAULT_FORM_CONTROL_SIZES, REG_EXP } from 'constant';
+import { DEFAULT_FORM_CONTROL_SIZES, REG_EXP } from 'utils/globals';
 
 export default {
   title: 'Components/Form/FormCard',

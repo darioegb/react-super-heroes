@@ -1,16 +1,14 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+
 import { mockFn } from 'setupTests';
 import { SuperHeroProvider } from 'modules/super-hero/context';
 import { SuperHeroGridPage } from '.';
-
-jest.mock('utils', () => ({
-  ...jest.requireActual('utils'),
-  fetch: mockFn.mockImplementation(() => undefined),
-}));
+import { instances } from 'config/httpCommon';
 
 describe('SuperHeroGridPage', () => {
+  const [instance] = instances;
   it('should change filter value when the input value is changed', async () => {
-    mockFn.mockResolvedValueOnce({
+    instance.request = mockFn.mockResolvedValueOnce({
       data: [
         {
           id: '1',

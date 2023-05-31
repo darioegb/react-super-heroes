@@ -2,7 +2,7 @@ import { createTheme, ThemeProvider, useMediaQuery } from '@mui/material';
 import { useMemo } from 'react';
 
 import { useApp } from 'hooks';
-import { LOCALES } from 'constant';
+import { LOCALES } from 'utils/globals';
 
 interface SystemThemeProps {
   children: JSX.Element;

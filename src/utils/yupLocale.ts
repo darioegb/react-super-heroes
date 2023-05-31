@@ -1,5 +1,5 @@
 import { setLocale } from 'yup';
-import { REG_EXP } from 'constant';
+import { REG_EXP } from 'utils/globals';
 
 setLocale({
   mixed: {

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import { GlobalLoader, Navbar } from 'components';
-import { LOCALES } from 'constant';
+import { LOCALES } from 'utils/globals';
 import { useAxiosLoader } from 'hooks';
 import './index.scss';
 

@@ -1,4 +1,4 @@
-import { GenreEnum } from 'constant';
+import { GenreEnum } from 'enums';
 import { PageConfig } from 'interfaces';
 
 interface SuperHeroCommons {
